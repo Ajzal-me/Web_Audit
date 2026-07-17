@@ -1,0 +1,33 @@
+{
+  "page": "test_pages/broken_page_1.html",
+  "ax_tree": [
+    { "element_ref": "a11y-1", "role": "heading", "name": "Our Services", "description": "", "states": { "level": 1 } },
+    { "element_ref": "a11y-2", "role": "heading", "name": "Pricing Details", "description": "", "states": { "level": 3 } },
+    { "element_ref": "a11y-3", "role": "textbox", "name": "", "description": "", "states": { "required": true } },
+    { "element_ref": "a11y-4", "role": "link", "name": "click here", "description": "", "states": {} },
+    { "element_ref": "a11y-5", "role": "button", "name": "Submit order", "description": "", "states": {} },
+    { "element_ref": "a11y-6", "role": "paragraph", "name": "We offer a range of consulting services for small businesses.", "description": "", "states": {} }
+  ],
+  "css_findings": [
+    { "element_ref": "a11y-6", "contrast_ratio": 2.1, "is_large_text": false, "focus_indicator_visible": true },
+    { "element_ref": "a11y-5", "contrast_ratio": 6.8, "is_large_text": false, "focus_indicator_visible": false },
+    { "element_ref": "a11y-1", "contrast_ratio": 9.4, "is_large_text": true, "focus_indicator_visible": true }
+  ],
+  "keyboard_sim": {
+    "traversal_order": ["a11y-3", "a11y-5"],
+    "unreachable": ["a11y-4"],
+    "illogical_jumps": [
+      { "element_ref": "a11y-5", "note": "Focus jumps from the textbox directly to the submit button, skipping the 'click here' link which appears between them in DOM order." }
+    ],
+    "trap_issues": [],
+    "small_targets": [
+      { "element_ref": "a11y-5", "width": 18, "height": 16 }
+    ]
+  },
+  "image_crops": [
+    { "element_ref": "a11y-7", "crop_path": "test_pages/_artifacts/crops/a11y-7.png", "claimed_alt": "" },
+    { "element_ref": "a11y-8", "crop_path": "test_pages/_artifacts/crops/a11y-8.png", "claimed_alt": "banner2.jpg" },
+    { "element_ref": "a11y-9", "crop_path": "test_pages/_artifacts/crops/a11y-9.png", "claimed_alt": "Line chart showing monthly revenue rising from $10k to $45k over the year" }
+  ],
+  "zoom_screenshot_path": "test_pages/_artifacts/broken_page_1_zoom200.png"
+}

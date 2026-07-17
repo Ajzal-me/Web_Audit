@@ -1,0 +1,97 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "extraction.schema.json",
+  "title": "Extraction",
+  "description": "Combined output of the extraction pipeline for a single page.",
+  "type": "object",
+  "required": ["page", "ax_tree", "css_findings", "keyboard_sim", "image_crops", "zoom_screenshot_path"],
+  "additionalProperties": false,
+  "properties": {
+    "page": {
+      "type": "string",
+      "description": "URL or file path of the page that was extracted."
+    },
+    "ax_tree": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["element_ref", "role", "name"],
+        "properties": {
+          "element_ref": { "type": "string", "pattern": "^a11y-[0-9]+$" },
+          "role": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "states": { "type": "object" }
+        }
+      }
+    },
+    "css_findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["element_ref", "contrast_ratio", "is_large_text", "focus_indicator_visible"],
+        "properties": {
+          "element_ref": { "type": "string", "pattern": "^a11y-[0-9]+$" },
+          "contrast_ratio": { "type": "number" },
+          "is_large_text": { "type": "boolean" },
+          "focus_indicator_visible": { "type": "boolean" }
+        }
+      }
+    },
+    "keyboard_sim": {
+      "type": "object",
+      "required": ["traversal_order", "unreachable", "illogical_jumps", "trap_issues", "small_targets"],
+      "properties": {
+        "traversal_order": { "type": "array", "items": { "type": "string" } },
+        "unreachable": { "type": "array", "items": { "type": "string" } },
+        "illogical_jumps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["element_ref", "note"],
+            "properties": {
+              "element_ref": { "type": "string" },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "trap_issues": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["element_ref", "note"],
+            "properties": {
+              "element_ref": { "type": "string" },
+              "note": { "type": "string" }
+            }
+          }
+        },
+        "small_targets": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["element_ref", "width", "height"],
+            "properties": {
+              "element_ref": { "type": "string" },
+              "width": { "type": "number" },
+              "height": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "image_crops": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["element_ref", "crop_path", "claimed_alt"],
+        "properties": {
+          "element_ref": { "type": "string", "pattern": "^a11y-[0-9]+$" },
+          "crop_path": { "type": "string" },
+          "claimed_alt": { "type": "string" }
+        }
+      }
+    },
+    "zoom_screenshot_path": { "type": "string" }
+  }
+}

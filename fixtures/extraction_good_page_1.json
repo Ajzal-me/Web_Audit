@@ -1,0 +1,27 @@
+{
+  "page": "test_pages/good_page_1.html",
+  "ax_tree": [
+    { "element_ref": "a11y-1", "role": "heading", "name": "Contact Us", "description": "", "states": { "level": 1 } },
+    { "element_ref": "a11y-2", "role": "heading", "name": "Send a message", "description": "", "states": { "level": 2 } },
+    { "element_ref": "a11y-3", "role": "textbox", "name": "Your email address", "description": "", "states": { "required": true } },
+    { "element_ref": "a11y-4", "role": "link", "name": "Read our full privacy policy", "description": "", "states": {} },
+    { "element_ref": "a11y-5", "role": "button", "name": "Send message", "description": "", "states": {} },
+    { "element_ref": "a11y-6", "role": "paragraph", "name": "We usually reply within one business day.", "description": "", "states": {} }
+  ],
+  "css_findings": [
+    { "element_ref": "a11y-6", "contrast_ratio": 7.2, "is_large_text": false, "focus_indicator_visible": true },
+    { "element_ref": "a11y-5", "contrast_ratio": 8.1, "is_large_text": false, "focus_indicator_visible": true },
+    { "element_ref": "a11y-1", "contrast_ratio": 10.5, "is_large_text": true, "focus_indicator_visible": true }
+  ],
+  "keyboard_sim": {
+    "traversal_order": ["a11y-3", "a11y-4", "a11y-5"],
+    "unreachable": [],
+    "illogical_jumps": [],
+    "trap_issues": [],
+    "small_targets": []
+  },
+  "image_crops": [
+    { "element_ref": "a11y-7", "crop_path": "test_pages/_artifacts/crops/a11y-7-good.png", "claimed_alt": "Our support team smiling in the office" }
+  ],
+  "zoom_screenshot_path": "test_pages/_artifacts/good_page_1_zoom200.png"
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "element_ref": "a11y-17",
+    "wcag_criterion": "1.1.1",
+    "description": "Missing alt text on primary banner image"
+  },
+  {
+    "element_ref": "a11y-18",
+    "wcag_criterion": "1.1.1",
+    "description": "Meaningless alt text filename on preview image"
+  },
+  {
+    "element_ref": "a11y-20",
+    "wcag_criterion": "2.4.4",
+    "description": "Meaningless link text 'click here'"
+  },
+  {
+    "element_ref": "a11y-24",
+    "wcag_criterion": "4.1.2",
+    "description": "Unlabeled text input field"
+  }
+]

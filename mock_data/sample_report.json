@@ -1,0 +1,84 @@
+{
+  "page": "test_pages/broken_page_1.html",
+  "generated_at": "2026-07-18T12:00:00Z",
+  "summary": {
+    "critical": 2,
+    "serious": 3,
+    "moderate": 2,
+    "minor": 1
+  },
+  "issues": [
+    {
+      "element_ref": "a11y-17",
+      "wcag_criteria": ["1.1.1"],
+      "severity": "critical",
+      "agents_flagging": ["screen_reader", "axe_baseline"],
+      "plain_language_description": "The primary banner image is missing an alternative text description, making it completely invisible to blind users.",
+      "recommended_fix": "Add a meaningful alt attribute to the <img> tag describing the visual content of the image.",
+      "evidence": ["Image tag is missing the alt attribute entirely."]
+    },
+    {
+      "element_ref": "a11y-18",
+      "wcag_criteria": ["1.1.1"],
+      "severity": "serious",
+      "agents_flagging": ["screen_reader"],
+      "plain_language_description": "The product preview image uses a generic file name ('image_placeholder_123.jpg') as its alt description, providing no context.",
+      "recommended_fix": "Replace the placeholder file name alt with a brief description of the product image.",
+      "evidence": ["alt text is the literal filename 'image_placeholder_123.jpg'"]
+    },
+    {
+      "element_ref": "a11y-20",
+      "wcag_criteria": ["2.4.4"],
+      "severity": "moderate",
+      "agents_flagging": ["screen_reader", "axe_baseline"],
+      "plain_language_description": "The link text 'click here' is meaningless out of context, making it hard for screen reader users to know where the link goes.",
+      "recommended_fix": "Change the link text to describe the target destination, for example, 'go to your dashboard'.",
+      "evidence": ["Link text is 'click here'"]
+    },
+    {
+      "element_ref": "a11y-24",
+      "wcag_criteria": ["4.1.2"],
+      "severity": "serious",
+      "agents_flagging": ["screen_reader"],
+      "plain_language_description": "The search input field lacks a programmatic label or name, making it unlabeled for screen readers.",
+      "recommended_fix": "Add a <label> element associated with the input by its id, or add an aria-label attribute directly.",
+      "evidence": ["Role is textbox but has no programmatic name."]
+    },
+    {
+      "element_ref": "a11y-15",
+      "wcag_criteria": ["1.4.3"],
+      "severity": "serious",
+      "agents_flagging": ["visual", "axe_baseline"],
+      "plain_language_description": "The text paragraph has a contrast ratio of 2.1:1, which is below the WCAG requirement of 4.5:1.",
+      "recommended_fix": "Darken the text color or lighten the background color to achieve a contrast ratio of at least 4.5:1.",
+      "evidence": ["Computed contrast ratio is 2.1:1 (normal text, required threshold is 4.5:1)"]
+    },
+    {
+      "element_ref": "a11y-17",
+      "wcag_criteria": ["2.4.7"],
+      "severity": "moderate",
+      "agents_flagging": ["visual"],
+      "plain_language_description": "The button does not display any visible focus ring when navigated to via keyboard.",
+      "recommended_fix": "Ensure that :focus styles are not removed via outline: none without providing a distinct visual alternative.",
+      "evidence": ["Focus indicator changed styles: False"]
+    },
+    {
+      "element_ref": "a11y-23",
+      "wcag_criteria": ["2.1.2"],
+      "severity": "critical",
+      "agents_flagging": ["motor"],
+      "plain_language_description": "The dialog modal traps keyboard focus. When open, pressing Escape does not close the dialog or restore focus back to the triggering element.",
+      "recommended_fix": "Ensure keyboard focus is restored to the triggering element when the modal closes, and that users can escape the modal using the Escape key.",
+      "evidence": ["After activating trigger and pressing Escape, focus did not return to the trigger."]
+    },
+    {
+      "element_ref": "a11y-26",
+      "wcag_criteria": ["2.5.8"],
+      "severity": "minor",
+      "agents_flagging": ["motor"],
+      "plain_language_description": "The close/delete button has a bounding box of 12x12px, which is smaller than the recommended minimum of 24x24px.",
+      "recommended_fix": "Increase the padding or height/width of the button target to at least 24px.",
+      "evidence": ["Target size is 12x12px, which is below the 24x24px threshold."]
+    }
+  ]
+}

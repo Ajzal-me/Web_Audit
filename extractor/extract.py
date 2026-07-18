@@ -22,11 +22,12 @@ from extractor.css_snapshot import get_css_findings
 from extractor.keyboard_sim import get_keyboard_sim
 from extractor.screenshot_crop import capture_crops
 from baseline.run_axe import run_axe
+from baseline.normalize_axe import normalize_axe_violations
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s: %(message)s")
 logger = logging.getLogger("a11yagents.extractor.extract")
 
-async def extract_page(page_path_or_url: str, output_path: str | None = None) -> dict:
+async def extract_page(page_path_or_url: str, output_path: str | None = None, include_axe: bool = False) -> dict:
     """
     Loads page, injects IDs, orchestrates extraction modules, and returns extraction dict.
     """
@@ -103,15 +104,26 @@ async def extract_page(page_path_or_url: str, output_path: str | None = None) ->
         }
         
         # Also run axe baseline if needed, but we don't include it in the extraction schema.
-        # Person 4's orchestrator will call run_axe.py and save raw violations.
+        axe_findings = []
+        if include_axe:
+            try:
+                axe_violations = await run_axe(page)
+                axe_findings = await normalize_axe_violations(page, axe_violations)
+            except Exception as e:
+                logger.error("Failed to execute Axe baseline: %s", e)
         
         await browser.close()
+        
+        if include_axe:
+            extraction["_axe_findings"] = axe_findings
         
     if output_path:
         out_p = Path(output_path).resolve()
         out_p.parent.mkdir(parents=True, exist_ok=True)
+        # Strip private keys like _axe_violations or _axe_findings to adhere strictly to extraction.schema.json
+        clean_extraction = {k: v for k, v in extraction.items() if not k.startswith("_")}
         with open(out_p, "w", encoding="utf-8") as f:
-            json.dump(extraction, f, indent=2)
+            json.dump(clean_extraction, f, indent=2)
         logger.info("Wrote extraction output to: %s", out_p)
         
     return extraction

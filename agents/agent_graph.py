@@ -9,13 +9,16 @@ import sys
 from pathlib import Path
 from typing import Annotated, Any, TypedDict
 
+# pyrefly: ignore [missing-import]
 from langgraph.graph import StateGraph, START, END
 
-# Ensure parent directory is in sys.path
+# Ensure parent directory and agents directory are in sys.path
 _THIS_DIR = Path(__file__).resolve().parent
 _REPO_ROOT = _THIS_DIR.parent
 if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
+if str(_THIS_DIR) not in sys.path:
+    sys.path.insert(0, str(_THIS_DIR))
 
 # Import existing agents (from same directory)
 import screen_reader_agent

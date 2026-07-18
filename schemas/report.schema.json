@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "report.schema.json",
+  "title": "Report",
+  "description": "Final synthesized accessibility audit report.",
+  "type": "object",
+  "required": ["page", "generated_at", "summary", "issues"],
+  "additionalProperties": false,
+  "properties": {
+    "page": {
+      "type": "string",
+      "description": "URL or file path of the page audited."
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO timestamp of when the report was generated."
+    },
+    "summary": {
+      "type": "object",
+      "required": ["critical", "serious", "moderate", "minor"],
+      "additionalProperties": false,
+      "properties": {
+        "critical": { "type": "integer", "minimum": 0 },
+        "serious": { "type": "integer", "minimum": 0 },
+        "moderate": { "type": "integer", "minimum": 0 },
+        "minor": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "element_ref",
+          "wcag_criteria",
+          "severity",
+          "agents_flagging",
+          "plain_language_description",
+          "recommended_fix",
+          "evidence"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "element_ref": {
+            "type": "string",
+            "pattern": "^a11y-[0-9]+$"
+          },
+          "wcag_criteria": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["critical", "serious", "moderate", "minor"]
+          },
+          "agents_flagging": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": ["screen_reader", "visual", "motor", "axe_baseline"]
+            },
+            "minItems": 1
+          },
+          "plain_language_description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "recommended_fix": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": { "type": "string" },
+            "minItems": 1
+          }
+        }
+      }
+    }
+  }
+}

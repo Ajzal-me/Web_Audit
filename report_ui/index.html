@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A11yAgents — Audit Report Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0e17;
+      --bg-card: rgba(20, 27, 45, 0.6);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --primary: #6366f1;
+      
+      --critical: #ef4444;
+      --serious: #f97316;
+      --moderate: #eab308;
+      --minor: #3b82f6;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      padding: 2rem;
+      min-height: 100vh;
+      background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent 400px);
+    }
+    
+    header {
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.5rem;
+    }
+    
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      background: linear-gradient(to right, #ffffff, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .file-input-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+    
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .btn:hover {
+      background-color: #4f46e5;
+    }
+    
+    input[type="file"] {
+      position: absolute;
+      left: 0; top: 0; opacity: 0;
+      width: 100%; height: 100%;
+      cursor: pointer;
+    }
+    
+    /* Summary Grid */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .summary-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .summary-count {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.25rem;
+    }
+    
+    .summary-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .card-critical { border-left: 5px solid var(--critical); color: var(--critical); }
+    .card-serious { border-left: 5px solid var(--serious); color: var(--serious); }
+    .card-moderate { border-left: 5px solid var(--moderate); color: var(--moderate); }
+    .card-minor { border-left: 5px solid var(--minor); color: var(--minor); }
+    
+    /* Comparison / Headline Panel */
+    .comparison-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    .comparison-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .comparison-bar {
+      display: flex;
+      height: 24px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .bar-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: white;
+    }
+    
+    .segment-agent-only { background-color: var(--primary); }
+    .segment-axe-only { background-color: #10b981; }
+    .segment-overlap { background-color: #6b7280; }
+    
+    .comparison-legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      margin-top: 0.3rem;
+      flex-shrink: 0;
+    }
+    
+    .legend-text h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .legend-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    
+    /* Issues List */
+    .filter-bar {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-btn {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .filter-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text-main); }
+    .filter-btn.active-all   { background: rgba(255,255,255,0.12); color: #fff; border-color: rgba(255,255,255,0.3); }
+    .filter-btn.active-critical { background: rgba(239,68,68,0.15); color: var(--critical); border-color: rgba(239,68,68,0.4); }
+    .filter-btn.active-serious  { background: rgba(249,115,22,0.15); color: var(--serious); border-color: rgba(249,115,22,0.4); }
+    .filter-btn.active-moderate { background: rgba(234,179,8,0.15); color: var(--moderate); border-color: rgba(234,179,8,0.4); }
+    .filter-btn.active-minor    { background: rgba(59,130,246,0.15); color: var(--minor); border-color: rgba(59,130,246,0.4); }
+
+    .sort-select {
+      margin-left: auto;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .issues-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .issue-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    
+    .issue-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    
+    .issue-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+      gap: 1rem;
+    }
+    
+    .issue-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+    }
+    
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    
+    .badge-critical { background: rgba(239, 68, 68, 0.15); color: var(--critical); border: 1px solid rgba(239, 68, 68, 0.3); }
+    .badge-serious { background: rgba(249, 115, 22, 0.15); color: var(--serious); border: 1px solid rgba(249, 115, 22, 0.3); }
+    .badge-moderate { background: rgba(234, 179, 8, 0.15); color: var(--moderate); border: 1px solid rgba(234, 179, 8, 0.3); }
+    .badge-minor { background: rgba(59, 130, 246, 0.15); color: var(--minor); border: 1px solid rgba(59, 130, 246, 0.3); }
+    
+    .badge-criterion {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .badge-agent {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    
+    .element-ref {
+      font-family: monospace;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    
+    .issue-desc {
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+    }
+    
+    .issue-fix {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 3px solid var(--primary);
+      padding: 0.75rem 1rem;
+      border-radius: 0 8px 8px 0;
+      font-size: 0.95rem;
+    }
+    
+    .fix-label {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    /* Mock Banner */
+    .mock-banner {
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px dashed var(--primary);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div>
+      <h1>A11yAgents Audit Dashboard</h1>
+      <p style="color: var(--text-muted); margin-top: 0.25rem;" id="page-url">Loading page details...</p>
+    </div>
+    <div class="file-input-wrapper">
+      <button class="btn">Load Custom Report</button>
+      <input type="file" id="report-loader" accept=".json">
+    </div>
+  </header>
+
+  <div class="mock-banner" id="banner">
+    Currently displaying simulated demonstration data. Load your generated <code>report.json</code> at the top right to view live findings.
+  </div>
+
+  <section class="summary-grid">
+    <div class="summary-card card-critical">
+      <div class="summary-count" id="count-critical">0</div>
+      <div class="summary-label">Critical</div>
+    </div>
+    <div class="summary-card card-serious">
+      <div class="summary-count" id="count-serious">0</div>
+      <div class="summary-label">Serious</div>
+    </div>
+    <div class="summary-card card-moderate">
+      <div class="summary-count" id="count-moderate">0</div>
+      <div class="summary-label">Moderate</div>
+    </div>
+    <div class="summary-card card-minor">
+      <div class="summary-count" id="count-minor">0</div>
+      <div class="summary-label">Minor</div>
+    </div>
+  </section>
+
+  <section class="comparison-panel">
+    <h3 class="comparison-title">
+      Value Beyond Axe-Core Baseline
+    </h3>
+    <div class="comparison-bar">
+      <div class="bar-segment segment-agent-only" id="bar-agent-only" style="width: 0%;"></div>
+      <div class="bar-segment segment-overlap" id="bar-overlap" style="width: 0%;"></div>
+      <div class="bar-segment segment-axe-only" id="bar-axe-only" style="width: 0%;"></div>
+    </div>
+    <div class="comparison-legend">
+      <div class="legend-item">
+        <div class="legend-dot segment-agent-only"></div>
+        <div class="legend-text">
+          <h4 id="legend-agent-count">Agent-Only (0)</h4>
+          <p>Accessibility issues detected uniquely by our advanced Screen Reader & Visual Agents.</p>
+        </div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot segment-overlap"></div>
+        <div class="legend-text">
+          <h4 id="legend-overlap-count">Overlapping (0)</h4>
+          <p>Accessibility violations caught by both baseline automation and advanced agents.</p>
+        </div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot segment-axe-only"></div>
+        <div class="legend-text">
+          <h4 id="legend-axe-count">Axe-Only (0)</h4>
+          <p>Violations detected exclusively by the standard Axe-core automated scanner.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="section-title">Audited Issues & Recommendations</h3>
+    <div class="filter-bar" id="filter-bar">
+      <button class="filter-btn active-all" id="filter-all" data-filter="all">All</button>
+      <button class="filter-btn" id="filter-critical" data-filter="critical">Critical</button>
+      <button class="filter-btn" id="filter-serious" data-filter="serious">Serious</button>
+      <button class="filter-btn" id="filter-moderate" data-filter="moderate">Moderate</button>
+      <button class="filter-btn" id="filter-minor" data-filter="minor">Minor</button>
+      <select class="sort-select" id="sort-select">
+        <option value="severity">Sort: Severity</option>
+        <option value="element">Sort: Element Ref</option>
+        <option value="agent">Sort: Agent</option>
+      </select>
+    </div>
+    <div class="issues-list" id="issues-container">
+      <!-- Dynamic issue cards go here -->
+    </div>
+  </section>
+
+  <script>
+    // Local WCAG criteria titles mapping
+    const CRITERIA_MAP = {
+      "1.1.1": "Non-text Content",
+      "1.3.1": "Info and Relationships",
+      "1.4.3": "Contrast (Minimum)",
+      "1.4.11": "Non-text Contrast",
+      "2.1.1": "Keyboard",
+      "2.1.2": "No Keyboard Trap",
+      "2.4.3": "Focus Order",
+      "2.4.4": "Link Purpose (In Context)",
+      "2.4.6": "Headings and Labels",
+      "2.4.7": "Focus Visible",
+      "2.5.8": "Target Size (Minimum)",
+      "4.1.2": "Name, Role, Value"
+    };
+
+    // Default demonstration data matching sample_report.json
+    const demoReport = {
+      "page": "test_pages/broken_page_1.html",
+      "summary": { "critical": 2, "serious": 3, "moderate": 2, "minor": 1 },
+      "issues": [
+        {
+          "element_ref": "a11y-17",
+          "wcag_criteria": ["1.1.1"],
+          "severity": "critical",
+          "agents_flagging": ["screen_reader", "axe_baseline"],
+          "plain_language_description": "The primary banner image is missing an alternative text description, making it completely invisible to screen readers.",
+          "recommended_fix": "Add a meaningful alt attribute to the <img> tag describing the visual content of the image.",
+          "evidence": ["Image tag is missing the alt attribute entirely."]
+        },
+        {
+          "element_ref": "a11y-18",
+          "wcag_criteria": ["1.1.1"],
+          "severity": "serious",
+          "agents_flagging": ["screen_reader"],
+          "plain_language_description": "The product preview image uses a generic file name ('image_placeholder_123.jpg') as its alt description, providing no contextual meaning.",
+          "recommended_fix": "Replace the placeholder file name alt with a brief description of the product image.",
+          "evidence": ["alt text is the literal filename 'image_placeholder_123.jpg'"]
+        },
+        {
+          "element_ref": "a11y-20",
+          "wcag_criteria": ["2.4.4"],
+          "severity": "moderate",
+          "agents_flagging": ["screen_reader", "axe_baseline"],
+          "plain_language_description": "The link text 'click here' is meaningless out of context, making it hard for screen reader users to navigate the page layout.",
+          "recommended_fix": "Change the link text to describe the target destination, for example, 'go to your dashboard'.",
+          "evidence": ["Link text is 'click here'"]
+        },
+        {
+          "element_ref": "a11y-24",
+          "wcag_criteria": ["4.1.2"],
+          "severity": "serious",
+          "agents_flagging": ["screen_reader"],
+          "plain_language_description": "The search input field lacks a programmatic label or name, making it unlabeled for screen readers.",
+          "recommended_fix": "Add a <label> element associated with the input by its id, or add an aria-label attribute directly.",
+          "evidence": ["Role is textbox but has no programmatic name."]
+        },
+        {
+          "element_ref": "a11y-15",
+          "wcag_criteria": ["1.4.3"],
+          "severity": "serious",
+          "agents_flagging": ["visual", "axe_baseline"],
+          "plain_language_description": "The text paragraph has a contrast ratio of 2.1:1, which is below the WCAG requirement of 4.5:1.",
+          "recommended_fix": "Darken the text color or lighten the background color to achieve a contrast ratio of at least 4.5:1.",
+          "evidence": ["Computed contrast ratio is 2.1:1 (normal text, required threshold is 4.5:1)"]
+        },
+        {
+          "element_ref": "a11y-17",
+          "wcag_criteria": ["2.4.7"],
+          "severity": "moderate",
+          "agents_flagging": ["visual"],
+          "plain_language_description": "The button does not display any visible focus ring when navigated to via keyboard.",
+          "recommended_fix": "Ensure that :focus styles are not removed via outline: none without providing a distinct visual alternative.",
+          "evidence": ["Focus indicator changed styles: False"]
+        },
+        {
+          "element_ref": "a11y-23",
+          "wcag_criteria": ["2.1.2"],
+          "severity": "critical",
+          "agents_flagging": ["motor"],
+          "plain_language_description": "The dialog modal traps keyboard focus. When open, pressing Escape does not close the dialog or restore focus back to the triggering element.",
+          "recommended_fix": "Ensure keyboard focus is restored to the triggering element when the modal closes, and that users can escape the modal using the Escape key.",
+          "evidence": ["After activating trigger and pressing Escape, focus did not return to the trigger."]
+        },
+        {
+          "element_ref": "a11y-26",
+          "wcag_criteria": ["2.5.8"],
+          "severity": "minor",
+          "agents_flagging": ["motor"],
+          "plain_language_description": "The close/delete button has a bounding box of 12x12px, which is smaller than the recommended minimum of 24x24px.",
+          "recommended_fix": "Increase the padding or height/width of the button target to at least 24px.",
+          "evidence": ["Target size is 12x12px, which is below the 24x24px threshold."]
+        }
+      ]
+    };
+
+    const demoComparison = {
+      "summary": {
+        "total_agent_findings": 5,
+        "total_axe_findings": 4,
+        "agent_only_count": 4,
+        "axe_only_count": 3,
+        "overlapping_count": 2
+      }
+    };
+
+    function renderReport(report, comparison = null) {
+      // Set page title / URL
+      document.getElementById('page-url').textContent = `Target audited: ${report.page}`;
+      
+      // Store issues for filter/sort
+      _currentIssues = report.issues || [];
+      _activeFilter = 'all';
+      _activeSort = document.getElementById('sort-select').value;
+      document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn');
+      document.getElementById('filter-all').classList.add('active-all');
+      
+      // Update summary counts
+      const sums = report.summary || { critical: 0, serious: 0, moderate: 0, minor: 0 };
+      document.getElementById('count-critical').textContent = sums.critical;
+      document.getElementById('count-serious').textContent = sums.serious;
+      document.getElementById('count-moderate').textContent = sums.moderate;
+      document.getElementById('count-minor').textContent = sums.minor;
+      
+      // Render comparison bar
+      // If we don't have comparison data supplied, we can guess it from the issues list
+      let agentOnly = 0, axeOnly = 0, overlap = 0;
+      if (comparison && comparison.summary) {
+        agentOnly = comparison.summary.agent_only_count;
+        axeOnly = comparison.summary.axe_only_count;
+        overlap = comparison.summary.overlapping_count;
+      } else {
+        // Simple partition logic
+        report.issues.forEach(issue => {
+          const agents = issue.agents_flagging || [];
+          const hasAxe = agents.includes('axe_baseline');
+          const hasAgent = agents.some(a => a !== 'axe_baseline');
+          if (hasAxe && hasAgent) overlap++;
+          else if (hasAgent) agentOnly++;
+          else if (hasAxe) axeOnly++;
+        });
+      }
+      
+      const total = agentOnly + axeOnly + overlap;
+      if (total > 0) {
+        const agentPct = (agentOnly / total) * 100;
+        const overlapPct = (overlap / total) * 100;
+        const axePct = (axeOnly / total) * 100;
+        
+        document.getElementById('bar-agent-only').style.width = `${agentPct}%`;
+        document.getElementById('bar-overlap').style.width = `${overlapPct}%`;
+        document.getElementById('bar-axe-only').style.width = `${axePct}%`;
+        
+        document.getElementById('bar-agent-only').textContent = agentOnly > 0 ? `${Math.round(agentPct)}%` : '';
+        document.getElementById('bar-overlap').textContent = overlap > 0 ? `${Math.round(overlapPct)}%` : '';
+        document.getElementById('bar-axe-only').textContent = axeOnly > 0 ? `${Math.round(axePct)}%` : '';
+      } else {
+        document.getElementById('bar-agent-only').style.width = `0%`;
+        document.getElementById('bar-overlap').style.width = `0%`;
+        document.getElementById('bar-axe-only').style.width = `0%`;
+      }
+      
+      document.getElementById('legend-agent-count').textContent = `Agent-Only (${agentOnly})`;
+      document.getElementById('legend-overlap-count').textContent = `Overlapping (${overlap})`;
+      document.getElementById('legend-axe-count').textContent = `Axe-Only (${axeOnly})`;
+      
+      // Render issue cards (extracted to separate function for filter/sort reuse)
+      applyFilterSort();
+    }
+
+    function renderIssueCards(issueList) {
+      const container = document.getElementById('issues-container');
+      container.innerHTML = '';
+
+      if (!issueList || issueList.length === 0) {
+        container.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 2rem;">No issues match this filter.</div>';
+        return;
+      }
+
+      issueList.forEach(issue => {
+        const card = document.createElement('div');
+        card.className = 'issue-card';
+
+        const severityClass = `badge-${issue.severity}`;
+
+        const criteriaBadges = (issue.wcag_criteria || []).map(crit => {
+          const title = CRITERIA_MAP[crit] ? `: ${CRITERIA_MAP[crit]}` : '';
+          return `<span class="badge badge-criterion">WCAG ${crit}${title}</span>`;
+        }).join(' ');
+
+        const agentBadges = (issue.agents_flagging || []).map(agent => {
+          const label = agent.replace(/_/g, ' ').replace('baseline', '(Axe)');
+          return `<span class="badge badge-agent">${label}</span>`;
+        }).join(' ');
+
+        card.innerHTML = `
+          <div class="issue-header">
+            <div class="issue-meta">
+              <span class="badge ${severityClass}">${issue.severity}</span>
+              ${criteriaBadges}
+              ${agentBadges}
+            </div>
+            <div class="element-ref">${issue.element_ref}</div>
+          </div>
+          <div class="issue-desc">
+            ${issue.plain_language_description}
+          </div>
+          <div class="issue-fix">
+            <div class="fix-label">Recommended Fix</div>
+            <div>${issue.recommended_fix}</div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // ─── Filter & Sort State ────────────────────────────────────────
+    let _currentIssues = [];
+    let _activeFilter = 'all';
+    let _activeSort = 'severity';
+
+    const SEVERITY_ORDER = { critical: 0, serious: 1, moderate: 2, minor: 3 };
+
+    function applyFilterSort() {
+      let list = [..._currentIssues];
+
+      // Filter
+      if (_activeFilter !== 'all') {
+        list = list.filter(i => i.severity === _activeFilter);
+      }
+
+      // Sort
+      if (_activeSort === 'element') {
+        list.sort((a, b) => a.element_ref.localeCompare(b.element_ref));
+      } else if (_activeSort === 'agent') {
+        list.sort((a, b) => (a.agents_flagging[0] || '').localeCompare(b.agents_flagging[0] || ''));
+      } else {
+        list.sort((a, b) => (SEVERITY_ORDER[a.severity] ?? 9) - (SEVERITY_ORDER[b.severity] ?? 9));
+      }
+
+      renderIssueCards(list);
+    }
+
+    // Wire up filter buttons
+    document.getElementById('filter-bar').addEventListener('click', function(e) {
+      const btn = e.target.closest('[data-filter]');
+      if (!btn) return;
+      _activeFilter = btn.dataset.filter;
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.className = 'filter-btn';
+      });
+      btn.classList.add(`active-${_activeFilter}`);
+      applyFilterSort();
+    });
+
+    document.getElementById('sort-select').addEventListener('change', function() {
+      _activeSort = this.value;
+      applyFilterSort();
+    });
+
+    // ─── Initialize with demo data ───────────────────────────────────
+    // Initialize with demo data
+    renderReport(demoReport, demoComparison);
+
+    // Setup file loader for custom reports
+    document.getElementById('report-loader').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const data = jsonParseOrComparison(evt.target.result);
+          document.getElementById('banner').style.display = 'none';
+          
+          if (data.issues) {
+            // Loaded report.json
+            renderReport(data);
+          } else if (data.agent_only_findings) {
+            // Loaded report_with_axe_comparison.json
+            const synthesizedIssues = [...data.agent_only_findings, ...data.axe_only_findings, ...data.overlapping_findings];
+            const dummyReport = {
+              "page": data.page,
+              "summary": {
+                "critical": countSeverity(synthesizedIssues, "critical"),
+                "serious": countSeverity(synthesizedIssues, "serious"),
+                "moderate": countSeverity(synthesizedIssues, "moderate"),
+                "minor": countSeverity(synthesizedIssues, "minor")
+              },
+              "issues": groupIssuesByElement(synthesizedIssues)
+            };
+            renderReport(dummyReport, data);
+          }
+        } catch(err) {
+          alert("Error parsing report JSON: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    function jsonParseOrComparison(text) {
+      return JSON.parse(text);
+    }
+
+    function countSeverity(list, sev) {
+      return list.filter(x => x.severity === sev).length;
+    }
+
+    function groupIssuesByElement(findings) {
+      const groups = {};
+      findings.forEach(f => {
+        const ref = f.element_ref;
+        if (!groups[ref]) {
+          groups[ref] = {
+            "element_ref": ref,
+            "wcag_criteria": [],
+            "severity": f.severity,
+            "agents_flagging": [],
+            "plain_language_description": "",
+            "recommended_fix": "",
+            "evidence": []
+          };
+        }
+        
+        const grp = groups[ref];
+        if (!grp.wcag_criteria.includes(f.wcag_criterion)) {
+          grp.wcag_criteria.push(f.wcag_criterion);
+        }
+        if (!grp.agents_flagging.includes(f.agent)) {
+          grp.agents_flagging.push(f.agent);
+        }
+        grp.evidence.push(f.evidence);
+        
+        // Simple descriptions concatenation
+        const agentName = f.agent.replace('_', ' ').replace('baseline', '(Axe)');
+        grp.plain_language_description += `${agentName} found ${f.issue_type}: ${f.evidence}. `;
+        grp.recommended_fix += `Fix: Check WCAG ${f.wcag_criterion}. `;
+      });
+      return Object.values(groups);
+    }
+
+    // Try to dynamically fetch live report files if they exist locally on dev server
+    async function loadLiveReport() {
+      try {
+        const reportRes = await fetch('../report.json');
+        if (!reportRes.ok) return;
+        const report = await reportRes.json();
+        
+        let comparison = null;
+        try {
+          const compRes = await fetch('../report_with_axe_comparison.json');
+          if (compRes.ok) {
+            comparison = await compRes.json();
+          }
+        } catch(e) {}
+        
+        document.getElementById('banner').style.display = 'none';
+        renderReport(report, comparison);
+      } catch(e) {
+        // Fallback silently to mock demo data
+      }
+    }
+
+    // Attempt to load live report on boot
+    loadLiveReport();
+  </script>
+</body>
+</html>

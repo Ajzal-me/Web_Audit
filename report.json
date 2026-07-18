@@ -1,0 +1,57 @@
+{
+  "page": "test_pages\\broken_page_1.html",
+  "generated_at": "2026-07-18T16:03:04.474969Z",
+  "summary": {
+    "critical": 2,
+    "serious": 0,
+    "moderate": 1,
+    "minor": 0
+  },
+  "issues": [
+    {
+      "element_ref": "a11y-27",
+      "wcag_criteria": [
+        "4.1.2"
+      ],
+      "severity": "critical",
+      "agents_flagging": [
+        "axe_baseline"
+      ],
+      "plain_language_description": "This element has an unlabeled button with no accessible name \u2014 Element does not have inner text that is visible to screen readers.",
+      "recommended_fix": "\u2022 (WCAG 4.1.2) Add a visible <label>, aria-label, or aria-labelledby so assistive technologies can read its name.",
+      "evidence": [
+        "Element does not have inner text that is visible to screen readers"
+      ]
+    },
+    {
+      "element_ref": "a11y-17",
+      "wcag_criteria": [
+        "1.1.1"
+      ],
+      "severity": "critical",
+      "agents_flagging": [
+        "axe_baseline"
+      ],
+      "plain_language_description": "This element has a missing image alt attribute \u2014 Element does not have an alt attribute.",
+      "recommended_fix": "\u2022 (WCAG 1.1.1) Add a meaningful alt attribute describing the content or purpose of the element.",
+      "evidence": [
+        "Element does not have an alt attribute"
+      ]
+    },
+    {
+      "element_ref": "a11y-10",
+      "wcag_criteria": [
+        "1.3.1"
+      ],
+      "severity": "moderate",
+      "agents_flagging": [
+        "axe_baseline"
+      ],
+      "plain_language_description": "This element has headings that skip levels (e.g. h1 \u2192 h3 with no h2) \u2014 Heading order invalid.",
+      "recommended_fix": "\u2022 (WCAG 1.3.1) Use semantic html elements and aria roles so structure is conveyed programmatically.",
+      "evidence": [
+        "Heading order invalid"
+      ]
+    }
+  ]
+}

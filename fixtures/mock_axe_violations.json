@@ -1,0 +1,54 @@
+[
+  {
+    "id": "color-contrast",
+    "impact": "serious",
+    "tags": ["wcag2aa", "wcag143"],
+    "description": "Ensures the contrast between foreground and background colors meets WCAG 2 AA contrast ratio thresholds",
+    "help": "Elements must have sufficient color contrast",
+    "nodes": [
+      {
+        "target": ["#hero-subtitle"],
+        "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.35 (foreground color: #999999, background color: #ffffff, font size: 10.5pt, font weight: normal). Expected contrast ratio of 4.5:1"
+      }
+    ]
+  },
+  {
+    "id": "image-alt",
+    "impact": "critical",
+    "tags": ["wcag2a", "wcag111"],
+    "description": "Ensures <img> elements have alternate text or a role of none or presentation",
+    "help": "Images must have alternate text",
+    "nodes": [
+      {
+        "target": ["img.banner-logo"],
+        "failureSummary": "Fix any of the following:\n  Element does not have an alt attribute\n  aria-label attribute does not exist or is empty"
+      }
+    ]
+  },
+  {
+    "id": "button-name",
+    "impact": "critical",
+    "tags": ["wcag2a", "wcag412"],
+    "description": "Ensures buttons have discernible text",
+    "help": "Buttons must have discernible text",
+    "nodes": [
+      {
+        "target": ["button.icon-only-close"],
+        "failureSummary": "Fix any of the following:\n  Element does not have inner text that is visible to screen readers\n  aria-label attribute does not exist or is empty"
+      }
+    ]
+  },
+  {
+    "id": "heading-order",
+    "impact": "moderate",
+    "tags": ["cat.semantics", "best-practice"],
+    "description": "Ensures the order of headings is semantically correct",
+    "help": "Heading levels should only increase by one",
+    "nodes": [
+      {
+        "target": ["#pricing-heading"],
+        "failureSummary": "Fix any of the following:\n  Heading order invalid"
+      }
+    ]
+  }
+]

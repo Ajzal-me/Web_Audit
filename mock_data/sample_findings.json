@@ -1,0 +1,152 @@
+[
+  {
+    "finding_id": "f-001",
+    "element_ref": "a11y-3",
+    "agent": "screen_reader",
+    "issue_type": "missing_alt",
+    "wcag_criterion": "1.1.1",
+    "severity": "serious",
+    "evidence": "alt attribute is empty on the banner logo image",
+    "confidence": 0.9
+  },
+  {
+    "finding_id": "f-002",
+    "element_ref": "a11y-3",
+    "agent": "axe_baseline",
+    "issue_type": "image-alt",
+    "wcag_criterion": "1.1.1",
+    "severity": "critical",
+    "evidence": "axe-core: element does not have an alt attribute or aria-label",
+    "confidence": 0.95
+  },
+  {
+    "finding_id": "f-003",
+    "element_ref": "a11y-5",
+    "agent": "motor",
+    "issue_type": "unreachable",
+    "wcag_criterion": "2.1.1",
+    "severity": "serious",
+    "evidence": "The 'Submit order' button never received keyboard focus during a full Tab traversal",
+    "confidence": 0.9
+  },
+  {
+    "finding_id": "f-004",
+    "element_ref": "a11y-5",
+    "agent": "visual",
+    "issue_type": "missing_focus_indicator",
+    "wcag_criterion": "2.4.7",
+    "severity": "serious",
+    "evidence": "The keyboard-operable element does not display any visible focus indicator when focused",
+    "confidence": 0.95
+  },
+  {
+    "finding_id": "f-005",
+    "element_ref": "a11y-6",
+    "agent": "visual",
+    "issue_type": "low_contrast",
+    "wcag_criterion": "1.4.3",
+    "severity": "serious",
+    "evidence": "Text has a computed contrast ratio of 2.1:1 against a 4.5:1 requirement",
+    "confidence": 1.0
+  },
+  {
+    "finding_id": "f-006",
+    "element_ref": "a11y-9",
+    "agent": "screen_reader",
+    "issue_type": "meaningless_link_text",
+    "wcag_criterion": "2.4.4",
+    "severity": "moderate",
+    "evidence": "Link text is 'click here' with no surrounding context to disambiguate its destination",
+    "confidence": 0.9
+  },
+  {
+    "finding_id": "f-007",
+    "element_ref": "a11y-9",
+    "agent": "axe_baseline",
+    "issue_type": "link-name",
+    "wcag_criterion": "2.4.4",
+    "severity": "serious",
+    "evidence": "axe-core: link has no discernible accessible name beyond generic text",
+    "confidence": 0.95
+  },
+  {
+    "finding_id": "f-008",
+    "element_ref": "a11y-12",
+    "agent": "motor",
+    "issue_type": "small_target",
+    "wcag_criterion": "2.5.8",
+    "severity": "moderate",
+    "evidence": "Checkbox target measured at 14x14px against a 24x24px minimum",
+    "confidence": 0.9
+  },
+  {
+    "finding_id": "f-009",
+    "element_ref": "a11y-14",
+    "agent": "screen_reader",
+    "issue_type": "heading_structure",
+    "wcag_criterion": "1.3.1",
+    "severity": "moderate",
+    "evidence": "Heading level jumps from h1 directly to h3, skipping h2",
+    "confidence": 0.9
+  },
+  {
+    "finding_id": "f-010",
+    "element_ref": "a11y-14",
+    "agent": "axe_baseline",
+    "issue_type": "heading-order",
+    "wcag_criterion": "1.3.1",
+    "severity": "moderate",
+    "evidence": "axe-core: heading levels should only increase by one",
+    "confidence": 0.95
+  },
+  {
+    "finding_id": "f-011",
+    "element_ref": "a11y-18",
+    "agent": "motor",
+    "issue_type": "focus_trap",
+    "wcag_criterion": "2.1.2",
+    "severity": "critical",
+    "evidence": "After activating the settings modal trigger and pressing Escape, focus did not return to the trigger and remained inside the modal",
+    "confidence": 0.9
+  },
+  {
+    "finding_id": "f-012",
+    "element_ref": "a11y-21",
+    "agent": "axe_baseline",
+    "issue_type": "button-name",
+    "wcag_criterion": "4.1.2",
+    "severity": "critical",
+    "evidence": "axe-core: icon-only close button has no inner text and no aria-label",
+    "confidence": 0.95
+  },
+  {
+    "finding_id": "f-013",
+    "element_ref": "a11y-25",
+    "agent": "screen_reader",
+    "issue_type": "unlabeled_control",
+    "wcag_criterion": "4.1.2",
+    "severity": "serious",
+    "evidence": "Textbox for 'email' has no accessible name (no label, aria-label, or placeholder-as-name)",
+    "confidence": 0.9
+  },
+  {
+    "finding_id": "f-014",
+    "element_ref": "a11y-30",
+    "agent": "visual",
+    "issue_type": "low_contrast",
+    "wcag_criterion": "1.4.3",
+    "severity": "minor",
+    "evidence": "Text has a computed contrast ratio of 4.1:1 against a 4.5:1 requirement, a small shortfall",
+    "confidence": 0.85
+  },
+  {
+    "finding_id": "f-015",
+    "element_ref": "a11y-33",
+    "agent": "motor",
+    "issue_type": "illogical_tab_order",
+    "wcag_criterion": "2.4.3",
+    "severity": "moderate",
+    "evidence": "Focus jumps backward from a later form field to an earlier one, breaking the visual left-to-right, top-to-bottom reading order",
+    "confidence": 0.85
+  }
+]

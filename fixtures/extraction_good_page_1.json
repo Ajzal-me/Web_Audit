@@ -1,27 +1,246 @@
 {
-  "page": "test_pages/good_page_1.html",
+  "page": "test_pages\\good_page_1.html",
   "ax_tree": [
-    { "element_ref": "a11y-1", "role": "heading", "name": "Contact Us", "description": "", "states": { "level": 1 } },
-    { "element_ref": "a11y-2", "role": "heading", "name": "Send a message", "description": "", "states": { "level": 2 } },
-    { "element_ref": "a11y-3", "role": "textbox", "name": "Your email address", "description": "", "states": { "required": true } },
-    { "element_ref": "a11y-4", "role": "link", "name": "Read our full privacy policy", "description": "", "states": {} },
-    { "element_ref": "a11y-5", "role": "button", "name": "Send message", "description": "", "states": {} },
-    { "element_ref": "a11y-6", "role": "paragraph", "name": "We usually reply within one business day.", "description": "", "states": {} }
+    {
+      "element_ref": "a11y-7",
+      "role": "banner",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-9",
+      "role": "main",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-8",
+      "role": "heading",
+      "name": "Welcome to the Accessible Page",
+      "description": "",
+      "states": {
+        "level": 1
+      }
+    },
+    {
+      "element_ref": "a11y-10",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-14",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-22",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-11",
+      "role": "heading",
+      "name": "About Our Services",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-12",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-15",
+      "role": "heading",
+      "name": "Contact Us",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-16",
+      "role": "form",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-23",
+      "role": "heading",
+      "name": "Visual Assets",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-24",
+      "role": "image",
+      "name": "A single solid grey pixel symbolizing successful placeholder loading",
+      "description": "",
+      "states": {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBASciXvQAAAAASUVORK5CYII="
+      }
+    },
+    {
+      "element_ref": "a11y-25",
+      "role": "button",
+      "name": "Close dialog",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true
+      }
+    },
+    {
+      "element_ref": "a11y-13",
+      "role": "link",
+      "name": "Learn more details about our services",
+      "description": "",
+      "states": {
+        "focusable": true,
+        "url": "file:///C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/services.html"
+      }
+    },
+    {
+      "element_ref": "a11y-18",
+      "role": "LabelText",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-19",
+      "role": "textbox",
+      "name": "Your Full Name:",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true,
+        "editable": "plaintext",
+        "settable": true,
+        "multiline": false,
+        "readonly": false,
+        "required": true
+      }
+    },
+    {
+      "element_ref": "a11y-20",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-21",
+      "role": "button",
+      "name": "Submit Form",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true
+      }
+    }
   ],
   "css_findings": [
-    { "element_ref": "a11y-6", "contrast_ratio": 7.2, "is_large_text": false, "focus_indicator_visible": true },
-    { "element_ref": "a11y-5", "contrast_ratio": 8.1, "is_large_text": false, "focus_indicator_visible": true },
-    { "element_ref": "a11y-1", "contrast_ratio": 10.5, "is_large_text": true, "focus_indicator_visible": true }
+    {
+      "element_ref": "a11y-19",
+      "contrast_ratio": 21.0,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-18",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-21",
+      "contrast_ratio": 7.04,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-15",
+      "contrast_ratio": 14.16,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-13",
+      "contrast_ratio": 7.04,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-8",
+      "contrast_ratio": 17.4,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-11",
+      "contrast_ratio": 14.16,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-12",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-25",
+      "contrast_ratio": 21.0,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-23",
+      "contrast_ratio": 14.16,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    }
   ],
   "keyboard_sim": {
-    "traversal_order": ["a11y-3", "a11y-4", "a11y-5"],
-    "unreachable": [],
+    "traversal_order": [
+      "a11y-19",
+      "a11y-21",
+      "a11y-25"
+    ],
+    "unreachable": [
+      "a11y-13"
+    ],
     "illogical_jumps": [],
     "trap_issues": [],
     "small_targets": []
   },
   "image_crops": [
-    { "element_ref": "a11y-7", "crop_path": "test_pages/_artifacts/crops/a11y-7-good.png", "claimed_alt": "Our support team smiling in the office" }
+    {
+      "element_ref": "a11y-24",
+      "crop_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/crops/a11y-24.png",
+      "claimed_alt": "A single solid grey pixel symbolizing successful placeholder loading"
+    },
+    {
+      "element_ref": "a11y-25",
+      "crop_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/crops/a11y-25.png",
+      "claimed_alt": "Close dialog"
+    }
   ],
-  "zoom_screenshot_path": "test_pages/_artifacts/good_page_1_zoom200.png"
+  "zoom_screenshot_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/zoom_good_page_1.png"
 }

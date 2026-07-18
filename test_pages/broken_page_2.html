@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broken Page 2 - Motor & Visual Issues</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    
+    /* Low contrast text (light gray on white background) */
+    .low-contrast-text {
+      color: #999999;
+      background-color: #ffffff;
+      font-size: 14px;
+    }
+    
+    /* Interactive element with outline: none and no visible focus state replacement */
+    .no-focus-ring {
+      outline: none;
+      background-color: #e0e0e0;
+      padding: 8px 16px;
+      border: 1px solid #999;
+      cursor: pointer;
+    }
+    
+    /* Very small target size (12px by 12px) */
+    .small-target-button {
+      width: 12px;
+      height: 12px;
+      padding: 0;
+      background-color: red;
+      border: none;
+      cursor: pointer;
+      display: inline-block;
+    }
+    
+    /* Custom div element acting as a button but lacks tabindex or role */
+    .div-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    
+    /* Modal styles */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Motor and Visual Issues Demo Page</h1>
+  </header>
+  <main>
+    <section>
+      <h2>Low Contrast Violation</h2>
+      <p class="low-contrast-text">This paragraph has extremely poor contrast ratio of less than 2.5:1 against the white background. It fails SC 1.4.3.</p>
+    </section>
+
+    <section>
+      <h2>Focus Indicators and Target Size</h2>
+      <button class="no-focus-ring">Button with No Focus Ring</button>
+      
+      <p>Small target: <button class="small-target-button" aria-label="Delete item"></button> (12x12px)</p>
+    </section>
+
+    <section>
+      <h2>Unfocusable Custom Controls</h2>
+      <!-- Standard div button with no keyboard interactivity at all -->
+      <div class="div-button" onclick="alert('Custom button clicked!')">
+        Unfocusable Div Button
+      </div>
+    </section>
+
+    <section>
+      <h2>Inescapable Keyboard Focus Trap Modal</h2>
+      <button id="open-modal-btn">Open Dialog Modal</button>
+      
+      <div class="modal-overlay" id="my-modal">
+        <div class="modal-content">
+          <h3>Inescapable Dialog Modal</h3>
+          <p>This modal traps your focus, and pressing Escape does not restore it properly!</p>
+          <button id="modal-first-btn">Modal Button 1</button>
+          <button id="modal-second-btn">Modal Button 2</button>
+          <!-- Notice: No Close button, or if we press Escape, we prevent default behavior to create a trap! -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const openBtn = document.getElementById('open-modal-btn');
+    const modal = document.getElementById('my-modal');
+    const modalBtn1 = document.getElementById('modal-first-btn');
+    const modalBtn2 = document.getElementById('modal-second-btn');
+
+    openBtn.addEventListener('click', () => {
+      modal.style.display = 'flex';
+      modalBtn1.focus();
+    });
+
+    // Custom focus loop to trap keyboard focus within modal
+    modal.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        const active = document.activeElement;
+        if (e.shiftKey) { // Shift + Tab
+          if (active === modalBtn1) {
+            modalBtn2.focus();
+            e.preventDefault();
+          }
+        } else { // Tab
+          if (active === modalBtn2) {
+            modalBtn1.focus();
+            e.preventDefault();
+          }
+        }
+      }
+      
+      // ILL-BEHAVED MODAL: Prevent Escape key from closing or restoring focus!
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        e.stopPropagation();
+        // It stays open, keeping the focus trapped!
+      }
+    });
+  </script>
+</body>
+</html>

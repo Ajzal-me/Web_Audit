@@ -1,33 +1,315 @@
 {
-  "page": "test_pages/broken_page_1.html",
+  "page": "test_pages\\broken_page_1.html",
   "ax_tree": [
-    { "element_ref": "a11y-1", "role": "heading", "name": "Our Services", "description": "", "states": { "level": 1 } },
-    { "element_ref": "a11y-2", "role": "heading", "name": "Pricing Details", "description": "", "states": { "level": 3 } },
-    { "element_ref": "a11y-3", "role": "textbox", "name": "", "description": "", "states": { "required": true } },
-    { "element_ref": "a11y-4", "role": "link", "name": "click here", "description": "", "states": {} },
-    { "element_ref": "a11y-5", "role": "button", "name": "Submit order", "description": "", "states": {} },
-    { "element_ref": "a11y-6", "role": "paragraph", "name": "We offer a range of consulting services for small businesses.", "description": "", "states": {} }
+    {
+      "element_ref": "a11y-7",
+      "role": "banner",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-9",
+      "role": "main",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-8",
+      "role": "heading",
+      "name": "Screen Reader Issues Demo Page",
+      "description": "",
+      "states": {
+        "level": 1
+      }
+    },
+    {
+      "element_ref": "a11y-10",
+      "role": "heading",
+      "name": "Skipped Heading Level 4 Section",
+      "description": "",
+      "states": {
+        "level": 4
+      }
+    },
+    {
+      "element_ref": "a11y-11",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-12",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-15",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-21",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-13",
+      "role": "heading",
+      "name": "Another Skipped Heading",
+      "description": "",
+      "states": {
+        "level": 4
+      }
+    },
+    {
+      "element_ref": "a11y-14",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-16",
+      "role": "heading",
+      "name": "Visual Elements with bad/missing alt",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-17",
+      "role": "image",
+      "name": "",
+      "description": "",
+      "states": {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBASciXvQAAAAASUVORK5CYII="
+      }
+    },
+    {
+      "element_ref": "a11y-18",
+      "role": "image",
+      "name": "image_placeholder_123.jpg",
+      "description": "",
+      "states": {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBASciXvQAAAAASUVORK5CYII="
+      }
+    },
+    {
+      "element_ref": "a11y-19",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-22",
+      "role": "heading",
+      "name": "Form Controls with missing labels",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-23",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-25",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-27",
+      "role": "button",
+      "name": "",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true
+      }
+    },
+    {
+      "element_ref": "a11y-20",
+      "role": "link",
+      "name": "click here",
+      "description": "",
+      "states": {
+        "focusable": true,
+        "url": "file:///C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/dashboard.html"
+      }
+    },
+    {
+      "element_ref": "a11y-24",
+      "role": "textbox",
+      "name": "Enter keywords...",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true,
+        "editable": "plaintext",
+        "settable": true,
+        "multiline": false,
+        "readonly": false,
+        "required": false
+      }
+    },
+    {
+      "element_ref": "a11y-26",
+      "role": "textbox",
+      "name": "email@address.com",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true,
+        "editable": "plaintext",
+        "settable": true,
+        "multiline": false,
+        "readonly": false,
+        "required": false
+      }
+    },
+    {
+      "element_ref": "a11y-28",
+      "role": "image",
+      "name": "",
+      "description": "",
+      "states": {}
+    }
   ],
   "css_findings": [
-    { "element_ref": "a11y-6", "contrast_ratio": 2.1, "is_large_text": false, "focus_indicator_visible": true },
-    { "element_ref": "a11y-5", "contrast_ratio": 6.8, "is_large_text": false, "focus_indicator_visible": false },
-    { "element_ref": "a11y-1", "contrast_ratio": 9.4, "is_large_text": true, "focus_indicator_visible": true }
+    {
+      "element_ref": "a11y-20",
+      "contrast_ratio": 9.4,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-8",
+      "contrast_ratio": 12.63,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-10",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-13",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-16",
+      "contrast_ratio": 12.63,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-22",
+      "contrast_ratio": 12.63,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-26",
+      "contrast_ratio": 21.0,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-11",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-24",
+      "contrast_ratio": 21.0,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-19",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-27",
+      "contrast_ratio": 21.0,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-14",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    }
   ],
   "keyboard_sim": {
-    "traversal_order": ["a11y-3", "a11y-5"],
-    "unreachable": ["a11y-4"],
-    "illogical_jumps": [
-      { "element_ref": "a11y-5", "note": "Focus jumps from the textbox directly to the submit button, skipping the 'click here' link which appears between them in DOM order." }
+    "traversal_order": [
+      "a11y-20",
+      "a11y-24",
+      "a11y-26",
+      "a11y-27"
     ],
+    "unreachable": [],
+    "illogical_jumps": [],
     "trap_issues": [],
     "small_targets": [
-      { "element_ref": "a11y-5", "width": 18, "height": 16 }
+      {
+        "element_ref": "a11y-20",
+        "width": 68,
+        "height": 17
+      },
+      {
+        "element_ref": "a11y-24",
+        "width": 177,
+        "height": 21
+      },
+      {
+        "element_ref": "a11y-26",
+        "width": 177,
+        "height": 21
+      }
     ]
   },
   "image_crops": [
-    { "element_ref": "a11y-7", "crop_path": "test_pages/_artifacts/crops/a11y-7.png", "claimed_alt": "" },
-    { "element_ref": "a11y-8", "crop_path": "test_pages/_artifacts/crops/a11y-8.png", "claimed_alt": "banner2.jpg" },
-    { "element_ref": "a11y-9", "crop_path": "test_pages/_artifacts/crops/a11y-9.png", "claimed_alt": "Line chart showing monthly revenue rising from $10k to $45k over the year" }
+    {
+      "element_ref": "a11y-17",
+      "crop_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/crops/a11y-17.png",
+      "claimed_alt": ""
+    },
+    {
+      "element_ref": "a11y-18",
+      "crop_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/crops/a11y-18.png",
+      "claimed_alt": "image_placeholder_123.jpg"
+    },
+    {
+      "element_ref": "a11y-27",
+      "crop_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/crops/a11y-27.png",
+      "claimed_alt": ""
+    }
   ],
-  "zoom_screenshot_path": "test_pages/_artifacts/broken_page_1_zoom200.png"
+  "zoom_screenshot_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/zoom_broken_page_1.png"
 }

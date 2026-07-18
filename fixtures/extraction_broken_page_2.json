@@ -1,0 +1,256 @@
+{
+  "page": "test_pages\\broken_page_2.html",
+  "ax_tree": [
+    {
+      "element_ref": "a11y-7",
+      "role": "banner",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-9",
+      "role": "main",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-8",
+      "role": "heading",
+      "name": "Motor and Visual Issues Demo Page",
+      "description": "",
+      "states": {
+        "level": 1
+      }
+    },
+    {
+      "element_ref": "a11y-10",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-13",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-18",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-21",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-11",
+      "role": "heading",
+      "name": "Low Contrast Violation",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-12",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-14",
+      "role": "heading",
+      "name": "Focus Indicators and Target Size",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-15",
+      "role": "button",
+      "name": "Button with No Focus Ring",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true
+      }
+    },
+    {
+      "element_ref": "a11y-16",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-19",
+      "role": "heading",
+      "name": "Unfocusable Custom Controls",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-20",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-22",
+      "role": "heading",
+      "name": "Inescapable Keyboard Focus Trap Modal",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-23",
+      "role": "button",
+      "name": "Open Dialog Modal",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true
+      }
+    },
+    {
+      "element_ref": "a11y-17",
+      "role": "button",
+      "name": "Delete item",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true
+      }
+    }
+  ],
+  "css_findings": [
+    {
+      "element_ref": "a11y-11",
+      "contrast_ratio": 21.0,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-17",
+      "contrast_ratio": 21.0,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-8",
+      "contrast_ratio": 21.0,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-16",
+      "contrast_ratio": 21.0,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-19",
+      "contrast_ratio": 21.0,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-15",
+      "contrast_ratio": 15.91,
+      "is_large_text": false,
+      "focus_indicator_visible": false
+    },
+    {
+      "element_ref": "a11y-23",
+      "contrast_ratio": 18.43,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-20",
+      "contrast_ratio": 3.98,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-12",
+      "contrast_ratio": 2.85,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-14",
+      "contrast_ratio": 21.0,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-22",
+      "contrast_ratio": 21.0,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    }
+  ],
+  "keyboard_sim": {
+    "traversal_order": [
+      "a11y-15",
+      "a11y-17",
+      "a11y-23"
+    ],
+    "unreachable": [],
+    "illogical_jumps": [],
+    "trap_issues": [
+      {
+        "element_ref": "a11y-23",
+        "note": "After activating trigger and pressing Escape, focus did not return to the trigger. Active element: a11y-29."
+      }
+    ],
+    "small_targets": [
+      {
+        "element_ref": "a11y-17",
+        "width": 12,
+        "height": 12
+      },
+      {
+        "element_ref": "a11y-23",
+        "width": 130,
+        "height": 21
+      },
+      {
+        "element_ref": "a11y-28",
+        "width": 106,
+        "height": 21
+      },
+      {
+        "element_ref": "a11y-29",
+        "width": 106,
+        "height": 21
+      }
+    ]
+  },
+  "image_crops": [
+    {
+      "element_ref": "a11y-17",
+      "crop_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/crops/a11y-17.png",
+      "claimed_alt": "Delete item"
+    }
+  ],
+  "zoom_screenshot_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/zoom_broken_page_2.png"
+}

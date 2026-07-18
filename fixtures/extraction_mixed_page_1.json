@@ -1,0 +1,274 @@
+{
+  "page": "test_pages\\mixed_page_1.html",
+  "ax_tree": [
+    {
+      "element_ref": "a11y-7",
+      "role": "heading",
+      "name": "Mixed Accessibility Page",
+      "description": "",
+      "states": {
+        "level": 1
+      }
+    },
+    {
+      "element_ref": "a11y-8",
+      "role": "heading",
+      "name": "Skipped H2 and H3 Heading",
+      "description": "",
+      "states": {
+        "level": 4
+      }
+    },
+    {
+      "element_ref": "a11y-9",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-14",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-20",
+      "role": "generic",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-10",
+      "role": "heading",
+      "name": "Image Alt Issues",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-11",
+      "role": "image",
+      "name": "",
+      "description": "",
+      "states": {
+        "url": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBASciXvQAAAAASUVORK5CYII="
+      }
+    },
+    {
+      "element_ref": "a11y-12",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-15",
+      "role": "heading",
+      "name": "Visual & Keyboard Issues",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-16",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-17",
+      "role": "button",
+      "name": "Search Database (No Focus Ring)",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true
+      }
+    },
+    {
+      "element_ref": "a11y-18",
+      "role": "paragraph",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-21",
+      "role": "heading",
+      "name": "Form Control Label Issue",
+      "description": "",
+      "states": {
+        "level": 2
+      }
+    },
+    {
+      "element_ref": "a11y-22",
+      "role": "LabelText",
+      "name": "",
+      "description": "",
+      "states": {}
+    },
+    {
+      "element_ref": "a11y-23",
+      "role": "textbox",
+      "name": "User name",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true,
+        "editable": "plaintext",
+        "settable": true,
+        "multiline": false,
+        "readonly": false,
+        "required": false
+      }
+    },
+    {
+      "element_ref": "a11y-13",
+      "role": "link",
+      "name": "click here",
+      "description": "",
+      "states": {
+        "focusable": true,
+        "url": "file:///C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/product.html"
+      }
+    },
+    {
+      "element_ref": "a11y-19",
+      "role": "button",
+      "name": "Remove tag",
+      "description": "",
+      "states": {
+        "invalid": "false",
+        "focusable": true
+      }
+    }
+  ],
+  "css_findings": [
+    {
+      "element_ref": "a11y-15",
+      "contrast_ratio": 12.63,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-7",
+      "contrast_ratio": 12.63,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-23",
+      "contrast_ratio": 21.0,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-8",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-13",
+      "contrast_ratio": 9.4,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-19",
+      "contrast_ratio": 18.43,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-17",
+      "contrast_ratio": 18.43,
+      "is_large_text": false,
+      "focus_indicator_visible": false
+    },
+    {
+      "element_ref": "a11y-22",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-10",
+      "contrast_ratio": 12.63,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-21",
+      "contrast_ratio": 12.63,
+      "is_large_text": true,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-18",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-16",
+      "contrast_ratio": 1.92,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    },
+    {
+      "element_ref": "a11y-12",
+      "contrast_ratio": 12.63,
+      "is_large_text": false,
+      "focus_indicator_visible": true
+    }
+  ],
+  "keyboard_sim": {
+    "traversal_order": [
+      "a11y-13",
+      "a11y-17",
+      "a11y-19",
+      "a11y-23"
+    ],
+    "unreachable": [],
+    "illogical_jumps": [],
+    "trap_issues": [],
+    "small_targets": [
+      {
+        "element_ref": "a11y-13",
+        "width": 68,
+        "height": 17
+      },
+      {
+        "element_ref": "a11y-17",
+        "width": 220,
+        "height": 21
+      },
+      {
+        "element_ref": "a11y-19",
+        "width": 16,
+        "height": 15
+      },
+      {
+        "element_ref": "a11y-23",
+        "width": 177,
+        "height": 21
+      }
+    ]
+  },
+  "image_crops": [
+    {
+      "element_ref": "a11y-11",
+      "crop_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/crops/a11y-11.png",
+      "claimed_alt": ""
+    }
+  ],
+  "zoom_screenshot_path": "C:/Users/Ajzal/OneDrive/Documents/IBM/Web_Audit/test_pages/_artifacts/zoom_mixed_page_1.png"
+}

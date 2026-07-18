@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mixed Accessibility Issues Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333;
+      padding: 20px;
+    }
+    .low-contrast {
+      color: #bbbbbb; /* light grey on white */
+    }
+    .no-focus:focus {
+      outline: none;
+    }
+    .small-button {
+      width: 15px;
+      height: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mixed Accessibility Page</h1>
+  
+  <!-- Skipped Heading -->
+  <h4>Skipped H2 and H3 Heading</h4>
+  
+  <section>
+    <h2>Image Alt Issues</h2>
+    <!-- Image with no alt text -->
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBASciXvQAAAAASUVORK5CYII=" 
+         width="120" height="120">
+         
+    <!-- Meaningless link text -->
+    <p>We launched a new product today. To read about it, <a href="product.html">click here</a>.</p>
+  </section>
+
+  <section>
+    <h2>Visual & Keyboard Issues</h2>
+    <p class="low-contrast">This text has poor contrast ratio of less than 2.0:1.</p>
+    
+    <!-- Focus indicator disabled -->
+    <button class="no-focus">Search Database (No Focus Ring)</button>
+    
+    <!-- Small target button -->
+    <p>Remove tag: <button class="small-button" aria-label="Remove tag">x</button></p>
+  </section>
+
+  <section>
+    <h2>Form Control Label Issue</h2>
+    <!-- Unlabeled form input -->
+    <label>Username (but input has no ID or association!):</label>
+    <input type="text" name="username_input" placeholder="User name">
+  </section>
+</body>
+</html>

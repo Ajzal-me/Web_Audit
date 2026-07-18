@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessible Good Page 1</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #333333;
+      background-color: #ffffff;
+      padding: 20px;
+      line-height: 1.5;
+    }
+    h1 {
+      color: #1a1a1a;
+      font-size: 24px;
+    }
+    h2 {
+      color: #2b2b2b;
+      font-size: 20px;
+    }
+    a {
+      color: #0056b3;
+      text-decoration: underline;
+      padding: 4px;
+    }
+    a:focus, button:focus, input:focus {
+      outline: 3px solid #0056b3;
+      outline-offset: 2px;
+    }
+    button {
+      background-color: #0056b3;
+      color: #ffffff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #004085;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #767676;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 300px;
+    }
+    .icon-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Welcome to the Accessible Page</h1>
+  </header>
+  <main>
+    <section>
+      <h2>About Our Services</h2>
+      <p>We provide accessible and high-quality solutions for modern web applications. Check out our <a href="services.html" aria-label="Learn more details about our services">detailed services page</a>.</p>
+    </section>
+    
+    <section>
+      <h2>Contact Us</h2>
+      <form action="#" method="post">
+        <div class="form-group">
+          <label for="username">Your Full Name:</label>
+          <input type="text" id="username" name="username" placeholder="Jane Doe" required>
+        </div>
+        <div class="form-group">
+          <button type="submit">Submit Form</button>
+        </div>
+      </form>
+    </section>
+    
+    <section>
+      <h2>Visual Assets</h2>
+      <!-- Image with a meaningful, descriptive alt text -->
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBASciXvQAAAAASUVORK5CYII=" 
+           alt="A single solid grey pixel symbolizing successful placeholder loading" 
+           width="100" height="100">
+      
+      <!-- Icon button with a clear aria-label -->
+      <button class="icon-button" aria-label="Close dialog">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </section>
+  </main>
+</body>
+</html>

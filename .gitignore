@@ -221,3 +221,10 @@ __pycache__/
 *.pyc
 .env
 test_pages/_artifacts/crops/placeholder.png
+
+
+report_with_axe_comparison.json
+report.json
+report_ui
+.env
+

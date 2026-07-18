@@ -2,31 +2,6 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "report.schema.json",
   "title": "Report",
-<<<<<<< HEAD
-  "description": "Final synthesized accessibility audit report.",
-  "type": "object",
-  "required": ["page", "generated_at", "summary", "issues"],
-  "additionalProperties": false,
-  "properties": {
-    "page": {
-      "type": "string",
-      "description": "URL or file path of the page audited."
-    },
-    "generated_at": {
-      "type": "string",
-      "format": "date-time",
-      "description": "ISO timestamp of when the report was generated."
-    },
-    "summary": {
-      "type": "object",
-      "required": ["critical", "serious", "moderate", "minor"],
-      "additionalProperties": false,
-      "properties": {
-        "critical": { "type": "integer", "minimum": 0 },
-        "serious": { "type": "integer", "minimum": 0 },
-        "moderate": { "type": "integer", "minimum": 0 },
-        "minor": { "type": "integer", "minimum": 0 }
-=======
   "description": "Final synthesized accessibility report for a single page: findings from all agents deduplicated/merged by element_ref, with one plain-language fix per group and a priority order.",
   "type": "object",
   "required": ["page", "generated_at", "issues"],
@@ -51,26 +26,10 @@
             "minor": { "type": "integer" }
           }
         }
->>>>>>> 0835fb10269ca5c48eb5e12bd3a96ad7762cbc16
       }
     },
     "issues": {
       "type": "array",
-<<<<<<< HEAD
-      "items": {
-        "type": "object",
-        "required": [
-          "element_ref",
-          "wcag_criteria",
-          "severity",
-          "agents_flagging",
-          "plain_language_description",
-          "recommended_fix",
-          "evidence"
-        ],
-        "additionalProperties": false,
-        "properties": {
-=======
       "description": "Ordered by priority: index 0 is the highest-priority issue to fix first.",
       "items": {
         "type": "object",
@@ -88,48 +47,17 @@
         "additionalProperties": false,
         "properties": {
           "issue_id": { "type": "string" },
->>>>>>> 0835fb10269ca5c48eb5e12bd3a96ad7762cbc16
           "element_ref": {
             "type": "string",
             "pattern": "^a11y-[0-9]+$"
           },
-<<<<<<< HEAD
-          "wcag_criteria": {
-            "type": "array",
-            "items": { "type": "string" },
-            "minItems": 1
-          },
-          "severity": {
-            "type": "string",
-            "enum": ["critical", "serious", "moderate", "minor"]
-          },
-          "agents_flagging": {
-            "type": "array",
-=======
           "agents_flagging": {
             "type": "array",
             "description": "Every agent (screen_reader/visual/motor/axe_baseline) that independently flagged this element. 2+ entries means a compounding issue.",
->>>>>>> 0835fb10269ca5c48eb5e12bd3a96ad7762cbc16
             "items": {
               "type": "string",
               "enum": ["screen_reader", "visual", "motor", "axe_baseline"]
             },
-<<<<<<< HEAD
-            "minItems": 1
-          },
-          "plain_language_description": {
-            "type": "string",
-            "minLength": 1
-          },
-          "recommended_fix": {
-            "type": "string",
-            "minLength": 1
-          },
-          "evidence": {
-            "type": "array",
-            "items": { "type": "string" },
-            "minItems": 1
-=======
             "minItems": 1,
             "uniqueItems": true
           },
@@ -162,7 +90,6 @@
             "type": "integer",
             "minimum": 1,
             "description": "1 = fix first. Must be unique and match this issue's position in the issues array (rank i+1 for index i)."
->>>>>>> 0835fb10269ca5c48eb5e12bd3a96ad7762cbc16
           }
         }
       }

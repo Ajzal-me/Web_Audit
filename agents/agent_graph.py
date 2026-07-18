@@ -22,25 +22,38 @@ from typing import Annotated, Any, Optional, TypedDict
 # pyrefly: ignore [missing-import]
 from langgraph.graph import StateGraph, START, END
 
-# Ensure parent directory and agents directory are in sys.path
+# ---------------------------------------------------------------------------
+# Ensure _THIS_DIR (agents/) is on sys.path so bare-name imports work when
+# this file is run directly (python agents/agent_graph.py). When imported as
+# a package (from agents.agent_graph import ...) the same names are found via
+# importlib relative imports below.
+# ---------------------------------------------------------------------------
 _THIS_DIR = Path(__file__).resolve().parent
 _REPO_ROOT = _THIS_DIR.parent
-if str(_REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(_REPO_ROOT))
-<<<<<<< HEAD
+
 if str(_THIS_DIR) not in sys.path:
     sys.path.insert(0, str(_THIS_DIR))
-=======
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
 if str(_REPO_ROOT / "baseline") not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT / "baseline"))
->>>>>>> 0835fb10269ca5c48eb5e12bd3a96ad7762cbc16
 
-# Import existing agents (from same directory)
-import screen_reader_agent
-import visual_agent
-import motor_agent
-import synthesis_agent
-from normalize_axe import normalize_violations
+# Import agents using importlib so the same code works whether this module
+# is being run as __main__ (bare sys.path) or imported as agents.agent_graph
+# (package-relative). We resolve each agent module by file path.
+import importlib.util as _ilu
+
+def _import_from_file(name: str, file_path: Path):
+    spec = _ilu.spec_from_file_location(name, file_path)
+    mod = _ilu.module_from_spec(spec)  # type: ignore[arg-type]
+    spec.loader.exec_module(mod)  # type: ignore[union-attr]
+    return mod
+
+screen_reader_agent = _import_from_file("screen_reader_agent", _THIS_DIR / "screen_reader_agent.py")
+visual_agent        = _import_from_file("visual_agent",        _THIS_DIR / "visual_agent.py")
+motor_agent         = _import_from_file("motor_agent",         _THIS_DIR / "motor_agent.py")
+synthesis_agent     = _import_from_file("synthesis_agent",     _THIS_DIR / "synthesis_agent.py")
+from baseline.normalize_axe import normalize_violations
 
 logger = logging.getLogger("a11yagents.agents.agent_graph")
 logging.basicConfig(level=logging.INFO)

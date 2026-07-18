@@ -449,82 +449,99 @@
       "4.1.2": "Name, Role, Value"
     };
 
-    // Default demonstration data matching sample_report.json
+    // Default demonstration data matching report.schema.json (new format)
     const demoReport = {
       "page": "test_pages/broken_page_1.html",
-      "summary": { "critical": 2, "serious": 3, "moderate": 2, "minor": 1 },
+      "generated_at": new Date().toISOString(),
+      "summary": { "total_issues": 8, "by_severity": { "critical": 2, "serious": 3, "moderate": 2, "minor": 1 } },
       "issues": [
         {
+          "issue_id": "demo-001",
           "element_ref": "a11y-17",
           "wcag_criteria": ["1.1.1"],
           "severity": "critical",
           "agents_flagging": ["screen_reader", "axe_baseline"],
           "plain_language_description": "The primary banner image is missing an alternative text description, making it completely invisible to screen readers.",
           "recommended_fix": "Add a meaningful alt attribute to the <img> tag describing the visual content of the image.",
-          "evidence": ["Image tag is missing the alt attribute entirely."]
+          "source_findings": ["finding-sr-001", "finding-axe-001"],
+          "priority_rank": 1
         },
         {
-          "element_ref": "a11y-18",
-          "wcag_criteria": ["1.1.1"],
-          "severity": "serious",
-          "agents_flagging": ["screen_reader"],
-          "plain_language_description": "The product preview image uses a generic file name ('image_placeholder_123.jpg') as its alt description, providing no contextual meaning.",
-          "recommended_fix": "Replace the placeholder file name alt with a brief description of the product image.",
-          "evidence": ["alt text is the literal filename 'image_placeholder_123.jpg'"]
+          "issue_id": "demo-002",
+          "element_ref": "a11y-23",
+          "wcag_criteria": ["2.1.2"],
+          "severity": "critical",
+          "agents_flagging": ["motor"],
+          "plain_language_description": "The dialog modal traps keyboard focus. Pressing Escape does not close the dialog or restore focus to the triggering element.",
+          "recommended_fix": "Ensure keyboard focus is restored when the modal closes, and that Escape key dismisses it.",
+          "source_findings": ["finding-motor-001"],
+          "priority_rank": 2
         },
         {
-          "element_ref": "a11y-20",
-          "wcag_criteria": ["2.4.4"],
-          "severity": "moderate",
-          "agents_flagging": ["screen_reader", "axe_baseline"],
-          "plain_language_description": "The link text 'click here' is meaningless out of context, making it hard for screen reader users to navigate the page layout.",
-          "recommended_fix": "Change the link text to describe the target destination, for example, 'go to your dashboard'.",
-          "evidence": ["Link text is 'click here'"]
-        },
-        {
-          "element_ref": "a11y-24",
-          "wcag_criteria": ["4.1.2"],
-          "severity": "serious",
-          "agents_flagging": ["screen_reader"],
-          "plain_language_description": "The search input field lacks a programmatic label or name, making it unlabeled for screen readers.",
-          "recommended_fix": "Add a <label> element associated with the input by its id, or add an aria-label attribute directly.",
-          "evidence": ["Role is textbox but has no programmatic name."]
-        },
-        {
+          "issue_id": "demo-003",
           "element_ref": "a11y-15",
           "wcag_criteria": ["1.4.3"],
           "severity": "serious",
           "agents_flagging": ["visual", "axe_baseline"],
           "plain_language_description": "The text paragraph has a contrast ratio of 2.1:1, which is below the WCAG requirement of 4.5:1.",
           "recommended_fix": "Darken the text color or lighten the background color to achieve a contrast ratio of at least 4.5:1.",
-          "evidence": ["Computed contrast ratio is 2.1:1 (normal text, required threshold is 4.5:1)"]
+          "source_findings": ["finding-visual-001", "finding-axe-002"],
+          "priority_rank": 3
         },
         {
-          "element_ref": "a11y-17",
+          "issue_id": "demo-004",
+          "element_ref": "a11y-18",
+          "wcag_criteria": ["1.1.1"],
+          "severity": "serious",
+          "agents_flagging": ["screen_reader"],
+          "plain_language_description": "The product preview image uses a generic file name as its alt text, providing no contextual meaning.",
+          "recommended_fix": "Replace the placeholder filename alt with a brief description of the product image.",
+          "source_findings": ["finding-sr-002"],
+          "priority_rank": 4
+        },
+        {
+          "issue_id": "demo-005",
+          "element_ref": "a11y-24",
+          "wcag_criteria": ["4.1.2"],
+          "severity": "serious",
+          "agents_flagging": ["screen_reader"],
+          "plain_language_description": "The search input field lacks a programmatic label, making it unlabeled for screen readers.",
+          "recommended_fix": "Add a <label> element associated with the input, or add an aria-label attribute directly.",
+          "source_findings": ["finding-sr-003"],
+          "priority_rank": 5
+        },
+        {
+          "issue_id": "demo-006",
+          "element_ref": "a11y-20",
+          "wcag_criteria": ["2.4.4"],
+          "severity": "moderate",
+          "agents_flagging": ["screen_reader", "axe_baseline"],
+          "plain_language_description": "The link text 'click here' is meaningless out of context for screen reader users navigating by links.",
+          "recommended_fix": "Change the link text to describe the target, for example 'View your dashboard'.",
+          "source_findings": ["finding-sr-004", "finding-axe-003"],
+          "priority_rank": 6
+        },
+        {
+          "issue_id": "demo-007",
+          "element_ref": "a11y-27",
           "wcag_criteria": ["2.4.7"],
           "severity": "moderate",
           "agents_flagging": ["visual"],
-          "plain_language_description": "The button does not display any visible focus ring when navigated to via keyboard.",
-          "recommended_fix": "Ensure that :focus styles are not removed via outline: none without providing a distinct visual alternative.",
-          "evidence": ["Focus indicator changed styles: False"]
+          "plain_language_description": "The button does not show any visible focus ring when navigated to by keyboard.",
+          "recommended_fix": "Add a :focus-visible style with a distinct outline or border change.",
+          "source_findings": ["finding-visual-002"],
+          "priority_rank": 7
         },
         {
-          "element_ref": "a11y-23",
-          "wcag_criteria": ["2.1.2"],
-          "severity": "critical",
-          "agents_flagging": ["motor"],
-          "plain_language_description": "The dialog modal traps keyboard focus. When open, pressing Escape does not close the dialog or restore focus back to the triggering element.",
-          "recommended_fix": "Ensure keyboard focus is restored to the triggering element when the modal closes, and that users can escape the modal using the Escape key.",
-          "evidence": ["After activating trigger and pressing Escape, focus did not return to the trigger."]
-        },
-        {
+          "issue_id": "demo-008",
           "element_ref": "a11y-26",
           "wcag_criteria": ["2.5.8"],
           "severity": "minor",
           "agents_flagging": ["motor"],
-          "plain_language_description": "The close/delete button has a bounding box of 12x12px, which is smaller than the recommended minimum of 24x24px.",
-          "recommended_fix": "Increase the padding or height/width of the button target to at least 24px.",
-          "evidence": ["Target size is 12x12px, which is below the 24x24px threshold."]
+          "plain_language_description": "The close button has a tap target of 12×12px, smaller than the 24×24px minimum.",
+          "recommended_fix": "Increase padding or dimensions so the click/touch target is at least 24×24 CSS pixels.",
+          "source_findings": ["finding-motor-002"],
+          "priority_rank": 8
         }
       ]
     };
@@ -550,12 +567,14 @@
       document.querySelectorAll('.filter-btn').forEach(b => b.className = 'filter-btn');
       document.getElementById('filter-all').classList.add('active-all');
       
-      // Update summary counts
-      const sums = report.summary || { critical: 0, serious: 0, moderate: 0, minor: 0 };
-      document.getElementById('count-critical').textContent = sums.critical;
-      document.getElementById('count-serious').textContent = sums.serious;
-      document.getElementById('count-moderate').textContent = sums.moderate;
-      document.getElementById('count-minor').textContent = sums.minor;
+      // Update summary counts — supports both old {critical,serious,...} and new {by_severity:{...}} shapes
+      const rawSums = report.summary || {};
+      const sums = rawSums.by_severity || rawSums;
+      const issues = report.issues || [];
+      document.getElementById('count-critical').textContent = sums.critical ?? issues.filter(i => i.severity==='critical').length;
+      document.getElementById('count-serious').textContent  = sums.serious  ?? issues.filter(i => i.severity==='serious').length;
+      document.getElementById('count-moderate').textContent = sums.moderate ?? issues.filter(i => i.severity==='moderate').length;
+      document.getElementById('count-minor').textContent    = sums.minor    ?? issues.filter(i => i.severity==='minor').length;
       
       // Render comparison bar
       // If we don't have comparison data supplied, we can guess it from the issues list
@@ -628,12 +647,22 @@
           return `<span class="badge badge-agent">${label}</span>`;
         }).join(' ');
 
+        const priorityBadge = issue.priority_rank
+          ? `<span class="badge" style="background:rgba(255,255,255,0.08);color:var(--text-muted);font-size:0.72rem;">#${issue.priority_rank} Priority</span>`
+          : '';
+        const sourceCount = (issue.source_findings || []).length;
+        const sourceBadge = sourceCount > 1
+          ? `<span class="badge badge-agent" title="${sourceCount} raw findings merged into this issue">${sourceCount} findings merged</span>`
+          : '';
+
         card.innerHTML = `
           <div class="issue-header">
             <div class="issue-meta">
+              ${priorityBadge}
               <span class="badge ${severityClass}">${issue.severity}</span>
               ${criteriaBadges}
               ${agentBadges}
+              ${sourceBadge}
             </div>
             <div class="element-ref">${issue.element_ref}</div>
           </div>

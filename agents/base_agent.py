@@ -27,6 +27,12 @@ import uuid
 from pathlib import Path
 from typing import Optional, Union
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 logger = logging.getLogger("a11yagents.base_agent")
 if not logger.handlers:
     logging.basicConfig(level=logging.INFO)

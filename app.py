@@ -68,6 +68,28 @@ def scan_url(req: ScanRequest):
             logger.error(f"Scan failed: {e}")
             raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/api/report")
+def get_report():
+    report_path = Path("report.json")
+    if not report_path.exists():
+        raise HTTPException(status_code=404, detail="No report found. Run an audit first.")
+    try:
+        return json.loads(report_path.read_text(encoding="utf-8"))
+    except Exception as e:
+        logger.error(f"Failed to read report.json: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/comparison")
+def get_comparison():
+    comp_path = Path("report_with_axe_comparison.json")
+    if not comp_path.exists():
+        raise HTTPException(status_code=404, detail="No comparison report found. Run an audit first.")
+    try:
+        return json.loads(comp_path.read_text(encoding="utf-8"))
+    except Exception as e:
+        logger.error(f"Failed to read report_with_axe_comparison.json: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
 # Mount the static UI (report_ui directory) to serve at the root
 # The html argument serves index.html at /
 app.mount("/", StaticFiles(directory="report_ui", html=True), name="static")

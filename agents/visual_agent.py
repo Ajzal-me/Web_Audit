@@ -147,11 +147,7 @@ def _findings_from_candidates(candidates: list[dict]) -> list[dict]:
     for i in range(0, len(candidates), CANDIDATE_BATCH_SIZE):
         batch = candidates[i : i + CANDIDATE_BATCH_SIZE]
         user_content = "Pre-computed candidates:\n" + json.dumps(batch, indent=2)
-        try:
-            raw = call_llm(system_prompt, user_content)
-        except Exception as e:  # noqa: BLE001
-            logger.error("visual_agent: candidate batch call failed: %s", e)
-            continue
+        raw = call_llm(system_prompt, user_content)
         findings.extend(validate_findings(raw))
 
     return findings
@@ -174,12 +170,7 @@ def _findings_from_screenshot(
     system_prompt = SCREENSHOT_SYSTEM_PROMPT.format(wcag_list=wcag_list)
     user_content = "Known element_refs on this page:\n" + json.dumps(known_element_refs)
 
-    try:
-        raw = call_llm(system_prompt, user_content, images=[zoom_screenshot_path])
-    except Exception as e:  # noqa: BLE001
-        logger.error("visual_agent: screenshot call failed: %s", e)
-        return []
-
+    raw = call_llm(system_prompt, user_content, images=[zoom_screenshot_path])
     return validate_findings(raw)
 
 

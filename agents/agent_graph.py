@@ -77,35 +77,23 @@ class AgentState(TypedDict):
 def screen_reader_node(state: AgentState) -> dict[str, Any]:
     """Runs the screen reader agent on the extracted page data."""
     logger.info("Executing screen_reader_node...")
-    try:
-        findings = screen_reader_agent.run(state["extraction"])
-        logger.info("screen_reader_node found %d issues", len(findings))
-        return {"findings": findings}
-    except Exception as e:
-        logger.error("Error in screen_reader_node: %s", e)
-        return {"findings": []}
+    findings = screen_reader_agent.run(state["extraction"])
+    logger.info("screen_reader_node found %d issues", len(findings))
+    return {"findings": findings}
 
 def visual_node(state: AgentState) -> dict[str, Any]:
     """Runs the visual agent on the extracted page data."""
     logger.info("Executing visual_node...")
-    try:
-        findings = visual_agent.run(state["extraction"])
-        logger.info("visual_node found %d issues", len(findings))
-        return {"findings": findings}
-    except Exception as e:
-        logger.error("Error in visual_node: %s", e)
-        return {"findings": []}
+    findings = visual_agent.run(state["extraction"])
+    logger.info("visual_node found %d issues", len(findings))
+    return {"findings": findings}
 
 def motor_node(state: AgentState) -> dict[str, Any]:
     """Runs the motor agent (keyboard/target-size checks) on the extracted page data."""
     logger.info("Executing motor_node...")
-    try:
-        findings = motor_agent.run(state["extraction"])
-        logger.info("motor_node found %d issues", len(findings))
-        return {"findings": findings}
-    except Exception as e:
-        logger.error("Error in motor_node: %s", e)
-        return {"findings": []}
+    findings = motor_agent.run(state["extraction"])
+    logger.info("motor_node found %d issues", len(findings))
+    return {"findings": findings}
 
 def axe_baseline_node(state: AgentState) -> dict[str, Any]:
     """Normalizes raw axe-core violations into finding.schema.json shape.
@@ -140,16 +128,12 @@ def synthesize_node(state: AgentState) -> dict[str, Any]:
     before running a fan-in node). Merges all accumulated findings into a
     final report via synthesis_agent."""
     logger.info("Executing synthesize_node with %d total findings...", len(state["findings"]))
-    try:
-        report = synthesis_agent.run(state["findings"], page=state["extraction"].get("page", ""))
-        if report is None:
-            logger.error("synthesize_node: synthesis_agent.run() returned None (schema validation failed)")
-            return {"report": None}
-        logger.info("synthesize_node produced a report with %d issue(s)", len(report["issues"]))
-        return {"report": report}
-    except Exception as e:
-        logger.error("Error in synthesize_node: %s", e)
+    report = synthesis_agent.run(state["findings"], page=state["extraction"].get("page", ""))
+    if report is None:
+        logger.error("synthesize_node: synthesis_agent.run() returned None (schema validation failed)")
         return {"report": None}
+    logger.info("synthesize_node produced a report with %d issue(s)", len(report["issues"]))
+    return {"report": report}
 
 # Build and compile the workflow graph
 workflow = StateGraph(AgentState)

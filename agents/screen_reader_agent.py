@@ -170,12 +170,7 @@ def _judge_images(image_crops: list[dict]) -> list[dict]:
             "claimed alt text:\n" + json.dumps(manifest, indent=2)
         )
 
-        try:
-            raw = call_llm(system_prompt, user_content, images=images)
-        except Exception as e:  # noqa: BLE001 - one bad batch shouldn't kill the whole run
-            logger.error("screen_reader_agent: image batch call failed: %s", e)
-            continue
-
+        raw = call_llm(system_prompt, user_content, images=images)
         findings.extend(validate_findings(raw))
 
     return findings
@@ -189,12 +184,7 @@ def _judge_ax_tree_text(ax_tree: list[dict]) -> list[dict]:
     system_prompt = TEXT_SYSTEM_PROMPT.format(wcag_list=wcag_list)
     user_content = "Here is the ax_tree for this page:\n" + json.dumps(ax_tree, indent=2)
 
-    try:
-        raw = call_llm(system_prompt, user_content)
-    except Exception as e:  # noqa: BLE001
-        logger.error("screen_reader_agent: ax_tree text call failed: %s", e)
-        return []
-
+    raw = call_llm(system_prompt, user_content)
     return validate_findings(raw)
 
 

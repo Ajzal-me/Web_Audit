@@ -254,8 +254,9 @@ def validate_findings(raw_json_str: str, schema: Optional[dict] = None) -> list[
     try:
         data = json.loads(cleaned)
     except json.JSONDecodeError as e:
-        logger.error("validate_findings: could not parse JSON from model output: %s", e)
-        return []
+        error_msg = f"validate_findings: could not parse JSON from model output: {e}\nRaw output:\n{raw_json_str}"
+        logger.error(error_msg)
+        raise RuntimeError(error_msg)
 
     if isinstance(data, dict):
         # tolerate a top-level {"findings": [...]} wrapper

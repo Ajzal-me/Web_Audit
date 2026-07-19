@@ -134,25 +134,10 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Extract page layout and accessibility metadata.")
     parser.add_argument("page", help="URL or path to local HTML file to extract.")
     parser.add_argument("--output", help="Path to write extraction JSON output.")
-    args = parser.parse_argument_group().parser.parse_args() if len(sys.argv) > 1 else parser.parse_args(args=["--help"])
+    args = parser.parse_args()
     
     import asyncio
     asyncio.run(extract_page(args.page, args.output))
 
 if __name__ == "__main__":
-    # If run directly without arguments, show help
-    if len(sys.argv) < 2:
-        print("Usage: python extractor/extract.py <url_or_path> [--output <json_path>]")
-        sys.exit(1)
-        
-    import asyncio
-    # Handle sys.argv manually to avoid argument conflicts
-    page_arg = sys.argv[1]
-    out_arg = None
-    if "--output" in sys.argv:
-        try:
-            out_arg = sys.argv[sys.argv.index("--output") + 1]
-        except IndexError:
-            pass
-            
-    asyncio.run(extract_page(page_arg, out_arg))
+    main()

@@ -156,11 +156,7 @@ def _findings_from_candidates(candidates: list[dict]) -> list[dict]:
         user_content = "Pre-detected keyboard/motor-accessibility candidates:\n" + json.dumps(
             batch, indent=2
         )
-        try:
-            raw = call_llm(system_prompt, user_content)
-        except Exception as e:  # noqa: BLE001 - one bad batch shouldn't kill the whole run
-            logger.error("motor_agent: candidate batch call failed: %s", e)
-            continue
+        raw = call_llm(system_prompt, user_content)
         findings.extend(validate_findings(raw))
 
     return findings

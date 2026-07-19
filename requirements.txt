@@ -2,3 +2,6 @@ google-genai>=0.3.0
 jsonschema>=4.21.0
 langgraph
 playwright
+fastapi
+uvicorn
+python-dotenv

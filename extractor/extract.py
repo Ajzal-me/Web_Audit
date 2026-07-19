@@ -57,9 +57,11 @@ async def extract_page(page_path_or_url: str, output_path: str | None = None, in
         page = await context.new_page()
         
         logger.info("Navigating to: %s", url)
-        await page.goto(url)
-        # Wait for page load
-        await page.wait_for_load_state("networkidle")
+        await page.goto(url, timeout=60000)
+        try:
+            await page.wait_for_load_state("load", timeout=30000)
+        except Exception:
+            pass # If it times out waiting for load, just proceed with what we have
         
         # 1. Inject data-a11y-id BEFORE any other DOM reads
         logger.info("Injecting data-a11y-ids into DOM...")

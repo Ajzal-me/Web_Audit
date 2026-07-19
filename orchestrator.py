@@ -68,8 +68,11 @@ async def orchestrate(page_path_or_url: str, output_path: str) -> None:
             else:
                 url = page_path_or_url
 
-            await pg.goto(url)
-            await pg.wait_for_load_state("networkidle")
+            await pg.goto(url, timeout=60000)
+            try:
+                await pg.wait_for_load_state("load", timeout=30000)
+            except Exception:
+                pass # If it times out waiting for load, just proceed with what we have
 
             # Inject data-a11y-ids so axe selectors resolve to our refs
             await pg.evaluate("""

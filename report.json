@@ -1,19 +1,36 @@
 {
-  "page": "test_pages\\mixed_page_1.html",
-  "generated_at": "2026-07-18T16:29:04.973634+00:00",
+  "page": "test_pages\\broken_page_1.html",
+  "generated_at": "2026-07-18T19:37:47.802937+00:00",
   "summary": {
-    "total_issues": 9,
+    "total_issues": 3,
     "by_severity": {
-      "critical": 1,
-      "serious": 1,
-      "moderate": 7,
+      "critical": 2,
+      "serious": 0,
+      "moderate": 1,
       "minor": 0
     }
   },
   "issues": [
     {
-      "issue_id": "ee5dfbe0-9f91-4164-9676-78b8a5ab212c",
-      "element_ref": "a11y-11",
+      "issue_id": "927cb6ef-3d81-4445-8b5f-60add1ac032f",
+      "element_ref": "a11y-27",
+      "agents_flagging": [
+        "axe_baseline"
+      ],
+      "wcag_criteria": [
+        "4.1.2"
+      ],
+      "severity": "critical",
+      "plain_language_description": "Buttons must have discernible text. Fix any of the following:   Element does not have inner text that is visible to screen readers   aria-label attribute does not exist or is empty   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty   Element has no title attribute   Element's default semantics were not overridden with role=\"none\" or role=\"presentation\".",
+      "recommended_fix": "Review this element against the WCAG criteria listed above.",
+      "source_findings": [
+        "86399897-b37f-4883-a77b-d6011e435f46"
+      ],
+      "priority_rank": 1
+    },
+    {
+      "issue_id": "1d7b2f7f-340d-497e-b6d8-508e51d4b8e3",
+      "element_ref": "a11y-17",
       "agents_flagging": [
         "axe_baseline"
       ],
@@ -24,149 +41,26 @@
       "plain_language_description": "Images must have alternate text. Fix any of the following:   Element does not have an alt attribute   aria-label attribute does not exist or is empty   aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty   Element has no title attribute   Element's default semantics were not overridden with role=\"none\" or role=\"presentation\".",
       "recommended_fix": "Review this element against the WCAG criteria listed above.",
       "source_findings": [
-        "c5df7898-56b3-441c-b8ab-57195efa9179"
-      ],
-      "priority_rank": 1
-    },
-    {
-      "issue_id": "4e04c1ad-8e7f-43b7-b0db-6b22a3f3e8d6",
-      "element_ref": "a11y-16",
-      "agents_flagging": [
-        "axe_baseline"
-      ],
-      "wcag_criteria": [
-        "1.4.3",
-        "4.1.2"
-      ],
-      "severity": "serious",
-      "plain_language_description": "Elements must meet minimum color contrast ratio thresholds. Fix any of the following:   Element has insufficient color contrast of 1.91 (foreground color: #bbbbbb, background color: #ffffff, font size: 12.0pt (16px), font weight: normal). Expected contrast ratio of 4.5:1.; All page content should be contained by landmarks. Fix any of the following:   Some page content is not contained by landmarks.",
-      "recommended_fix": "Review this element against the WCAG criteria listed above.",
-      "source_findings": [
-        "755e0e9b-4d4b-4518-8036-5155e71803a1",
-        "89d214f4-688d-4b40-97f6-9d6b4ac9da03"
+        "52d4419b-7cce-4964-8de1-af5400812474"
       ],
       "priority_rank": 2
     },
     {
-      "issue_id": "2add18a6-653a-4fc6-ae9e-5f63d97baee2",
-      "element_ref": "a11y-8",
+      "issue_id": "40bdf000-669a-43a5-a1d7-ae071c6546f8",
+      "element_ref": "a11y-10",
       "agents_flagging": [
         "axe_baseline"
       ],
       "wcag_criteria": [
-        "1.3.1",
-        "4.1.2"
+        "1.3.1"
       ],
       "severity": "moderate",
-      "plain_language_description": "Heading levels should only increase by one. Fix any of the following:   Heading order invalid.; All page content should be contained by landmarks. Fix any of the following:   Some page content is not contained by landmarks.",
+      "plain_language_description": "Heading levels should only increase by one. Fix any of the following:   Heading order invalid.",
       "recommended_fix": "Review this element against the WCAG criteria listed above.",
       "source_findings": [
-        "8e35bbae-64c9-44e0-9dd1-e5ad0ae19d22",
-        "e5fc2610-63d9-4a2f-8027-50803a191f25"
+        "5b75d796-8586-407c-8cb0-b7e5a1461330"
       ],
       "priority_rank": 3
-    },
-    {
-      "issue_id": "c54384fe-2a72-449c-9ea7-0ef8a2732998",
-      "element_ref": "a11y-0",
-      "agents_flagging": [
-        "axe_baseline"
-      ],
-      "wcag_criteria": [
-        "4.1.2"
-      ],
-      "severity": "moderate",
-      "plain_language_description": "Document should have one main landmark. Fix all of the following:   Document does not have a main landmark.",
-      "recommended_fix": "Review this element against the WCAG criteria listed above.",
-      "source_findings": [
-        "42fea39a-2c1d-4e46-b320-31f9c7e5aa91"
-      ],
-      "priority_rank": 4
-    },
-    {
-      "issue_id": "b596bc67-a045-433d-acd7-dd0561132db1",
-      "element_ref": "a11y-7",
-      "agents_flagging": [
-        "axe_baseline"
-      ],
-      "wcag_criteria": [
-        "4.1.2"
-      ],
-      "severity": "moderate",
-      "plain_language_description": "All page content should be contained by landmarks. Fix any of the following:   Some page content is not contained by landmarks.",
-      "recommended_fix": "Review this element against the WCAG criteria listed above.",
-      "source_findings": [
-        "95f61adb-e41c-492c-bb47-3341d2dba54e"
-      ],
-      "priority_rank": 5
-    },
-    {
-      "issue_id": "e1a94345-88ea-4e14-afc0-009abdce1fde",
-      "element_ref": "a11y-9",
-      "agents_flagging": [
-        "axe_baseline"
-      ],
-      "wcag_criteria": [
-        "4.1.2"
-      ],
-      "severity": "moderate",
-      "plain_language_description": "All page content should be contained by landmarks. Fix any of the following:   Some page content is not contained by landmarks.",
-      "recommended_fix": "Review this element against the WCAG criteria listed above.",
-      "source_findings": [
-        "a5770084-5ace-4884-9588-27f110ce147a"
-      ],
-      "priority_rank": 6
-    },
-    {
-      "issue_id": "883623fb-ade2-46dc-9f82-074d584e0248",
-      "element_ref": "a11y-15",
-      "agents_flagging": [
-        "axe_baseline"
-      ],
-      "wcag_criteria": [
-        "4.1.2"
-      ],
-      "severity": "moderate",
-      "plain_language_description": "All page content should be contained by landmarks. Fix any of the following:   Some page content is not contained by landmarks.",
-      "recommended_fix": "Review this element against the WCAG criteria listed above.",
-      "source_findings": [
-        "512d8ba1-42bb-4e8d-9c5e-54c28a0466db"
-      ],
-      "priority_rank": 7
-    },
-    {
-      "issue_id": "d4d63306-cd6a-4199-ae8b-65492f0d2894",
-      "element_ref": "a11y-18",
-      "agents_flagging": [
-        "axe_baseline"
-      ],
-      "wcag_criteria": [
-        "4.1.2"
-      ],
-      "severity": "moderate",
-      "plain_language_description": "All page content should be contained by landmarks. Fix any of the following:   Some page content is not contained by landmarks.",
-      "recommended_fix": "Review this element against the WCAG criteria listed above.",
-      "source_findings": [
-        "c9dffe8f-e7a9-4af5-bd66-7af7e0cc9089"
-      ],
-      "priority_rank": 8
-    },
-    {
-      "issue_id": "3d21fda0-ce78-4f03-a08c-39b66740ed7c",
-      "element_ref": "a11y-20",
-      "agents_flagging": [
-        "axe_baseline"
-      ],
-      "wcag_criteria": [
-        "4.1.2"
-      ],
-      "severity": "moderate",
-      "plain_language_description": "All page content should be contained by landmarks. Fix any of the following:   Some page content is not contained by landmarks.",
-      "recommended_fix": "Review this element against the WCAG criteria listed above.",
-      "source_findings": [
-        "99512dd5-71b4-43f9-846e-a7b755ed267b"
-      ],
-      "priority_rank": 9
     }
   ]
 }
